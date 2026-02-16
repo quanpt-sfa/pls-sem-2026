@@ -1,0 +1,4 @@
+"Relation","X","Y","Beta_Linear_Base","Beta_Linear_QuadModel","CI_Linear_Lo","CI_Linear_Hi","Sig_Linear","P_Linear","Beta_Quadratic","CI_Quad_Lo","CI_Quad_Hi","Sig_Quadratic","P_Quadratic","VIF_Quadratic","Delta_Beta_Linear","R2_Linear","R2_Quadratic","Delta_R2","R2_Base_PLS","Note"
+"Competence → Audit Judgment","COM","AJ",0.202,0.222,0.081,0.368,TRUE,0.0044,0.01,-0.024,0.041,FALSE,0.5783,2.62,0.0199,0.634,0.634,5e-04,0.7,"Linear conclusion robust — no significant quadratic effect"
+"Audit Judgment → Audit Quality","AJ","AQ",0.385,0.38,0.283,0.48,TRUE,4e-04,-0.008,-0.023,0.009,FALSE,0.3271,1.83,-0.005,0.777,0.777,3e-04,0.79,"Linear conclusion robust — no significant quadratic effect"
+"Ethics → Audit Quality","ETH","AQ",0.517,0.472,0.369,0.573,TRUE,4e-04,-0.021,-0.038,-0.005,TRUE,0.008,2.18,-0.0449,0.777,0.779,0.0025,0.79,"Evidence of nonlinearity — linear effect stable (same sign/sig); quadratic adds curvature"

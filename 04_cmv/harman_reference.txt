@@ -1,0 +1,4 @@
+Harman's single-factor test (REFERENCE ONLY):
+  First component explains: 45.6% of variance
+  Conclusion: OK — <50%
+  NOTE: This is a supplementary reference, NOT a primary CMV test.

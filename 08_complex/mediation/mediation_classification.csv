@@ -1,0 +1,8 @@
+"X","M","Y","Direct_c","Direct_Sig","Indirect_ab","Indirect_Sig","Total","VAF","Classification"
+"COM","AJ","AQ",0.118,TRUE,0.062,TRUE,0.181,0.344,"Complementary partial mediation"
+"PS","AJ","AQ",-0.006,FALSE,0.107,TRUE,0.101,1.06,"Indirect-only (full mediation)"
+"MO","AJ","AQ",-0.021,FALSE,0.01,FALSE,-0.011,NA,"No-effect"
+"TP","AJ","AQ",-0.038,FALSE,0.062,TRUE,0.023,2.656,"Indirect-only (full mediation)"
+"IT","AJ","AQ",0.001,FALSE,0.053,FALSE,0.054,0.987,"No-effect"
+"CEV","AJ","AQ",0.148,TRUE,0.065,FALSE,0.213,0.307,"Direct-only (no mediation)"
+"CG","AJ","AQ",0.052,FALSE,0.06,TRUE,0.112,0.534,"Indirect-only (full mediation)"

@@ -1,0 +1,6 @@
+"Source","Target","Type"
+"Gen","Gen_Dummy","dummy"
+"Exp","Exp_Ord","ordinal"
+"Pos","Pos_Ord","ordinal"
+"Cert","Edu_PostGrad","regex_dummy"
+"Cert","CPA_Dummy","regex_dummy"

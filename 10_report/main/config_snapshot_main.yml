@@ -1,0 +1,85 @@
+# ==============================================================================
+# MAIN STUDY CONFIG — Phân tích chính thức (full CCA-SEM)
+# ==============================================================================
+# Extends / overrides: 00_meta/analysis_config.yaml
+# Mục đích: Chạy đầy đủ pipeline CCA-SEM với instrument đã đóng băng.
+#            Kết quả dùng cho luận văn/báo cáo chính thức.
+# ==============================================================================
+
+stage: "main"
+
+# --- Pilot exclusion (ID-based) ---
+# Main đọc pilot_ids.csv và LOẠI những người đã tham gia pilot.
+# Đảm bảo independent samples giữa pilot và main.
+exclude_pilot_ids: "10_report/pilot/pilot_ids.csv"
+id_column: "Responder ID"
+
+# --- Dữ liệu đầu vào ---
+data_input:
+  data_file: "data.xlsx"          # Data chính thức (main study)
+  data_sheet: "Data"
+  codebook_sheet: "Code_book"
+
+# --- Tham số ước lượng ---
+seed: 18
+bootstrap_samples: 5000
+confidence_level: 0.95
+significance_level: 0.05
+
+# --- PLSpredict params ---
+plspredict:
+  k_folds: 10
+  repetitions: 10
+
+# --- Output ---
+output_dir: "10_report/main"
+log_prefix: "main"
+
+# --- Module flags ---
+# Main chạy đầy đủ tất cả modules
+modules:
+  enable_cmv: true
+  enable_reflective: true
+  enable_formative: true
+  enable_hoc: true
+  enable_structural: true
+  enable_plspredict: true
+  enable_mediation: true
+  enable_moderation: true
+  enable_robustness: true
+  enable_nonlinear: true
+  enable_level_heterogeneity: true
+  enable_report: true
+
+# --- Optimizer rules (main: đóng băng instrument) ---
+# Main KHÔNG auto-drop; mọi thay đổi phải qua freeze_rules (audit trail).
+optimizer:
+  auto_drop_enabled: false        # Instrument frozen — changes via freeze_rules only
+  loading_drop_threshold: 0.40    # Only used when auto_drop_enabled = true
+  max_iterations: 3
+
+# --- Endogeneity (Gaussian Copula) ---
+# List ONLY genuinely suspected regressors (not all exogenous!).
+# Variables not in any structural equation as predictors are ignored.
+# Set suspected: [] to skip the Gaussian Copula test entirely.
+endogeneity:
+  suspected: ["COM", "PS", "AJ"]
+  cor_threshold: 0.95        # Skip copula if cor(X, COP_X) > this
+  force_normal: false         # TRUE = override non-normality gate
+
+# --- Freeze rules ---
+# Nếu cần override instrument lock cho một vài item cụ thể,
+# khai báo ở đây. Mỗi rule phải có construct + indicator + action + reason.
+# Ví dụ:
+freeze_rules:
+  - construct: "TP"
+    indicator: "TP3"
+    action: "drop"
+    reason: "Loading=0.379 < 0.40 in both pilot and main; pre-registered drop rule"
+
+# --- Instrument Lock ---
+# Main PHẢI ĐỌC instrument_locked.json từ pilot output
+instrument_lock:
+  create_on_completion: false
+  require_from_pilot: true
+  pilot_lock_path: "10_report/pilot/instrument_locked.json"

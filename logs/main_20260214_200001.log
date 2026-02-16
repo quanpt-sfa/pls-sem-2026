@@ -1,0 +1,569 @@
+[2026-02-14 20:00:01] [INFO] ========================================
+[2026-02-14 20:00:01] [INFO] CCA-SEM Pipeline — Log started
+[2026-02-14 20:00:01] [INFO] Time: 2026-02-14 20:00:01.473473
+[2026-02-14 20:00:01] [INFO] R version: R version 4.4.3 (2025-02-28 ucrt)
+[2026-02-14 20:00:01] [INFO] ========================================
+[2026-02-14 20:00:01] [INFO] Stage: MAIN
+[2026-02-14 20:00:01] [INFO] Date filter: Time 2025-11-07..*
+[2026-02-14 20:00:01] [INFO] Project: PLS-SEM Dissertation Analysis — Audit Quality (Khung CCA)
+[2026-02-14 20:00:01] [INFO] Config: config/main.yml
+[2026-02-14 20:00:01] [INFO] Seed: 42
+[2026-02-14 20:00:01] [INFO] Bootstrap: 5000
+[2026-02-14 20:00:01] [INFO] Constructs: 11
+[2026-02-14 20:00:01] [INFO]   Reflective: 5
+[2026-02-14 20:00:01] [INFO]   Formative: 6
+[2026-02-14 20:00:01] [INFO] Structural paths: 10
+[2026-02-14 20:00:01] [INFO] Output dir: 10_report/main
+[2026-02-14 20:00:01] [INFO] Config snapshot saved: 10_report/main/config_snapshot_main.yml
+[2026-02-14 20:00:01] [INFO] Session info saved: 10_report/main/session_info.txt
+[2026-02-14 20:00:01] [INFO] Instrument lock loaded: 10_report/pilot/instrument_locked.json
+[2026-02-14 20:00:01] [INFO]   Lock timestamp: 2026-02-14T19:59:43
+[2026-02-14 20:00:01] [INFO]   COM [formative]: 9 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   PS [reflective]: 5 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   MO [formative]: 5 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   TP [reflective]: 4 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   IT [reflective]: 3 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   CEV [reflective]: 5 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   CG [formative]: 9 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   ETH [formative]: 4 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   TC [formative]: 6 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   AJ [reflective]: 3 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   AQ [formative]: 6 indicators (locked)
+[2026-02-14 20:00:01] [INFO]   Items removed in pilot: 1
+[2026-02-14 20:00:01] [INFO]     IT.IT4 — Auto-removed: loading 0.296 < 0.40 (pilot iteration 1)
+[2026-02-14 20:00:01] [INFO] Instrument FROZEN — using locked indicators from pilot
+[2026-02-14 20:00:01] [INFO] 
+===== PHASE 1: DATA PREPARATION =====
+[2026-02-14 20:00:01] [INFO] 
+[2026-02-14 20:00:01] [INFO] >>> Step 1: Import & Technical Validation
+[2026-02-14 20:00:01] [INFO] --------------------------------------------------
+[2026-02-14 20:00:01] [INFO] Raw data: 466 rows x 68 cols
+[2026-02-14 20:00:01] [INFO] Raw snapshot saved: 01_raw/raw_data.rds
+[2026-02-14 20:00:01] [INFO] Extra columns (not in config): IT4
+[2026-02-14 20:00:01] [WARN] Flagged 35 potential duplicates (same response pattern)
+[2026-02-14 20:00:01] [INFO] After tech validation: 466 rows x 69 cols
+[2026-02-14 20:00:01] [GATE] ✅ GATE [ Tech Validation ]: PASS
+[2026-02-14 20:00:01] [GATE]   Details: All expected columns present
+[2026-02-14 20:00:01] [INFO] Date filter applied (Time): 466 → 396 rows  [2025-11-07 .. *]
+[2026-02-14 20:00:01] [INFO] 
+[2026-02-14 20:00:01] [INFO] >>> Step 2: Behavioral Quality Control
+[2026-02-14 20:00:01] [INFO] --------------------------------------------------
+[2026-02-14 20:00:01] [INFO] Straight-lining flagged (Global SD=0): 31 (7.8%)
+[2026-02-14 20:00:01] [INFO] Longstring threshold (auto, P95): 59
+[2026-02-14 20:00:01] [INFO] Long-string flagged: 31 (7.8%)
+[2026-02-14 20:00:01] [WARN] Time values appear to be epoch timestamps (median=1763595321). Converting to durations from earliest response.
+[2026-02-14 20:00:01] [WARN] Epoch-derived durations are not true completion times — speeding check SKIPPED
+[2026-02-14 20:00:01] [INFO] Speeding flagged: 0 (skipped — no valid duration column)
+[2026-02-14 20:00:01] [INFO] Low IRV flagged: 31 (threshold: 0.000)
+[2026-02-14 20:00:01] [INFO] Total flagged for removal: 31 (7.8%)
+[2026-02-14 20:00:02] [INFO] Screening funnel plot saved
+[2026-02-14 20:00:02] [INFO] After QC screening: 365 rows (removed 31)
+[2026-02-14 20:00:02] [GATE] ✅ GATE [ Behavioral QC ]: PASS
+[2026-02-14 20:00:02] [GATE]   Details: N=365, minimum required=90
+[2026-02-14 20:00:02] [INFO] 
+[2026-02-14 20:00:02] [INFO] >>> Step 3: Missing Data Handling
+[2026-02-14 20:00:02] [INFO] --------------------------------------------------
+[2026-02-14 20:00:02] [INFO] Variable-level missing: min=0.0%, max=0.0%, median=0.0%
+[2026-02-14 20:00:02] [INFO] No observations exceed missing threshold
+[2026-02-14 20:00:02] [INFO] Imputed 0 values using 'mean' method
+[2026-02-14 20:00:02] [INFO] Assumption: MCAR
+[2026-02-14 20:00:02] [INFO] Final dataset: 365 rows x 59 indicator columns
+[2026-02-14 20:00:02] [GATE] ✅ GATE [ Missing Data ]: PASS
+[2026-02-14 20:00:02] [GATE]   Details: Remaining NA: 0, method: mean
+[2026-02-14 20:00:02] [INFO] 
+[2026-02-14 20:00:02] [INFO] >>> Step 4: Descriptive Statistics & Plausibility Checks
+[2026-02-14 20:00:02] [INFO] --------------------------------------------------
+[2026-02-14 20:00:02] [INFO] Descriptive stats: 59 variables computed
+[2026-02-14 20:00:02] [WARN] Extreme skewness (|>2|): COM1, COM9, PS2, PS3, PS4, PS5, ETH1, ETH2, ETH3, ETH4
+[2026-02-14 20:00:02] [WARN] Extreme kurtosis (|>7|): COM1, PS3, ETH1, ETH2
+[2026-02-14 20:00:02] [INFO] --- 4b.1. Demographic Profile (Table 1) ---
+[2026-02-14 20:00:02] [INFO]   Giới tính: 2 categories, N=365
+[2026-02-14 20:00:02] [INFO]   Bằng cấp: 2 categories, N=365
+[2026-02-14 20:00:02] [INFO]   Chứng chỉ hành nghề: 2 categories, N=365
+[2026-02-14 20:00:02] [INFO]   Kinh nghiệm: 5 categories, N=365
+[2026-02-14 20:00:02] [INFO]   Vị trí: 4 categories, N=365
+[2026-02-14 20:00:02] [INFO]   Saved: 04_descriptives/demographic_profile.csv (15 rows)
+[2026-02-14 20:00:02] [INFO] Sample demographics: 5 variables summarized
+[2026-02-14 20:00:04] [INFO] Distribution plots saved: 04_descriptives/distribution_plots.pdf
+[2026-02-14 20:00:04] [GATE] ✅ GATE [ Descriptives ]: PASS
+[2026-02-14 20:00:04] [GATE]   Details: PASS with warnings — skew/kurtosis anomalies noted (acceptable for Likert data)
+[2026-02-14 20:00:04] [INFO] Descriptives complete — data cleared for modeling (distributional warnings noted)
+[2026-02-14 20:00:04] [INFO] --- 4b.2. Dummy / Ordinal Coding ---
+[2026-02-14 20:00:04] [INFO]   [DUMMY] Gen -> Gen_Dummy: 365 mapped, 0 unmapped
+[2026-02-14 20:00:04] [INFO]   [ORDINAL] Exp -> Exp_Ord: 365 mapped (1..5), 0 unmapped
+[2026-02-14 20:00:04] [INFO]   [ORDINAL] Pos -> Pos_Ord: 365 mapped (1..4), 0 unmapped
+[2026-02-14 20:00:04] [INFO]   [REGEX_DUMMY] Cert -> Edu_PostGrad: pattern='Sau đại học', match=50, no_match=315
+[2026-02-14 20:00:04] [INFO]   [REGEX_DUMMY] Cert -> CPA_Dummy: pattern='Chứng chỉ Kiểm toán viên|CPA', match=150, no_match=215
+[2026-02-14 20:00:04] [INFO] 
+Control variable coding complete: 5 variable(s) coded
+[2026-02-14 20:00:04] [INFO] 
+--- New Coded Columns Summary ---
+[2026-02-14 20:00:04] [INFO]   Gen_Dummy: N=365, range=[0, 1], M=0.48, SD=0.50
+[2026-02-14 20:00:04] [INFO]   Exp_Ord: N=365, range=[1, 5], M=2.30, SD=1.35
+[2026-02-14 20:00:04] [INFO]   Pos_Ord: N=365, range=[1, 4], M=2.07, SD=1.10
+[2026-02-14 20:00:04] [INFO]   Edu_PostGrad: N=365, range=[0, 1], M=0.14, SD=0.34
+[2026-02-14 20:00:04] [INFO]   CPA_Dummy: N=365, range=[0, 1], M=0.41, SD=0.49
+[2026-02-14 20:00:04] [INFO] 
+Phase 1 complete — Analysis-ready dataset: 365 rows, 73 cols
+[2026-02-14 20:00:04] [INFO] 
+===== PHASE 2: CMV & MEASUREMENT MODEL =====
+[2026-02-14 20:00:04] [INFO] 
+[2026-02-14 20:00:04] [INFO] >>> Step 5: CMV/CMB Assessment
+[2026-02-14 20:00:04] [INFO] --------------------------------------------------
+[2026-02-14 20:00:04] [INFO] Procedural remedies applied during survey design:
+  - Anonymity emphasized in instructions
+  - Academic purpose clearly stated
+  - Standardized, clear question wording
+  - Varied item ordering to reduce cognitive load
+  - Pilot-tested for clarity and completion time
+  - Consistent Likert scale format
+[2026-02-14 20:00:04] [INFO] Running Full Collinearity VIF Assessment...
+[2026-02-14 20:00:04] [INFO] Full Collinearity VIF range: [1.544, 5.082]
+[2026-02-14 20:00:04] [INFO]   Thresholds: WARN >= 3.3, FAIL >= 5.0
+[2026-02-14 20:00:04] [INFO]   COM: VIF = 5.025 [FAIL]
+[2026-02-14 20:00:04] [INFO]   PS: VIF = 4.382 [WARN]
+[2026-02-14 20:00:04] [INFO]   MO: VIF = 2.128 [OK]
+[2026-02-14 20:00:04] [INFO]   TP: VIF = 1.544 [OK]
+[2026-02-14 20:00:04] [INFO]   IT: VIF = 2.232 [OK]
+[2026-02-14 20:00:04] [INFO]   CEV: VIF = 3.299 [OK]
+[2026-02-14 20:00:04] [INFO]   CG: VIF = 2.593 [OK]
+[2026-02-14 20:00:04] [INFO]   ETH: VIF = 4.843 [WARN]
+[2026-02-14 20:00:04] [INFO]   TC: VIF = 1.619 [OK]
+[2026-02-14 20:00:04] [INFO]   AJ: VIF = 3.813 [WARN]
+[2026-02-14 20:00:04] [INFO]   AQ: VIF = 5.082 [FAIL]
+[2026-02-14 20:00:04] [INFO] Running Harman's single-factor test (reference only)...
+[2026-02-14 20:00:04] [INFO] Harman's single-factor test (REFERENCE ONLY):
+  First component explains: 46.0% of variance
+  Conclusion: OK — <50%
+  NOTE: This is a supplementary reference, NOT a primary CMV test.
+[2026-02-14 20:00:04] [INFO] Marker variable: NOT available in survey design (limitation noted)
+[2026-02-14 20:00:04] [GATE] ❌ GATE [ CMV/CMB ]: FAIL
+[2026-02-14 20:00:04] [GATE]   Details: Max full collinearity VIF: 5.082 >= 5.0 (serious CMV concern)
+[2026-02-14 20:00:04] [INFO] Using instrument-locked indicators (no auto-drop)
+[2026-02-14 20:00:04] [INFO] 
+--- Measurement Model Optimizer: DISABLED (instrument frozen) ---
+[2026-02-14 20:00:04] [INFO] PLS model estimated successfully
+[2026-02-14 20:00:04] [INFO] No indicators auto-removed — model is clean
+[2026-02-14 20:00:04] [INFO] 
+--- Final Indicator Counts ---
+[2026-02-14 20:00:04] [INFO]   COM [formative]: 9/9
+[2026-02-14 20:00:04] [INFO]   PS [reflective]: 5/5
+[2026-02-14 20:00:04] [INFO]   MO [formative]: 5/5
+[2026-02-14 20:00:04] [INFO]   TP [reflective]: 4/4
+[2026-02-14 20:00:04] [INFO]   IT [reflective]: 3/3
+[2026-02-14 20:00:04] [INFO]   CEV [reflective]: 5/5
+[2026-02-14 20:00:04] [INFO]   CG [formative]: 9/9
+[2026-02-14 20:00:04] [INFO]   ETH [formative]: 4/4
+[2026-02-14 20:00:04] [INFO]   TC [formative]: 6/6
+[2026-02-14 20:00:04] [INFO]   AJ [reflective]: 3/3
+[2026-02-14 20:00:04] [INFO]   AQ [formative]: 6/6
+[2026-02-14 20:00:04] [INFO] 
+Bootstrapping (5000 samples)...
+[2026-02-14 20:01:18] [INFO] Bootstrap complete
+[2026-02-14 20:01:19] [INFO] 
+[2026-02-14 20:01:19] [INFO] >>> Step 6: Reflective Measurement Model Assessment (CCA Mode A)
+[2026-02-14 20:01:19] [INFO] --------------------------------------------------
+[2026-02-14 20:01:20] [INFO] --- 6.1. Outer Loadings (Indicator Reliability) ---
+[2026-02-14 20:01:20] [INFO] INDICATOR [ PS1 ]: KEEP — Loading 0.857 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ PS2 ]: KEEP — Loading 0.847 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ PS3 ]: KEEP — Loading 0.913 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ PS4 ]: KEEP — Loading 0.855 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ PS5 ]: KEEP — Loading 0.900 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ TP1 ]: KEEP — Loading 0.841 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ TP2 ]: REVIEW — Loading 0.583 in [0.40, 0.708] — review if removing improves CR/AVE
+[2026-02-14 20:01:20] [INFO] INDICATOR [ TP3 ]: DROP_CANDIDATE — Loading 0.364 < 0.40
+[2026-02-14 20:01:20] [INFO] INDICATOR [ TP4 ]: KEEP — Loading 1.000 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ IT1 ]: KEEP — Loading 0.927 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ IT2 ]: KEEP — Loading 0.906 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ IT3 ]: KEEP — Loading 0.870 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ CEV1 ]: KEEP — Loading 0.801 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ CEV2 ]: KEEP — Loading 0.928 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ CEV3 ]: KEEP — Loading 0.864 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ CEV4 ]: KEEP — Loading 0.872 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ CEV5 ]: KEEP — Loading 0.797 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ AJ1 ]: KEEP — Loading 0.853 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ AJ2 ]: KEEP — Loading 0.891 >= 0.708
+[2026-02-14 20:01:20] [INFO] INDICATOR [ AJ3 ]: KEEP — Loading 0.913 >= 0.708
+[2026-02-14 20:01:20] [INFO] --- 6.2. Internal Consistency Reliability ---
+[2026-02-14 20:01:20] [INFO]   PS: Alpha=0.942, rho_A=0.943, CR=0.942, AVE=0.766
+[2026-02-14 20:01:20] [INFO]   TP: Alpha=0.823, rho_A=0.897, CR=0.810, AVE=0.545
+[2026-02-14 20:01:20] [INFO]   IT: Alpha=0.928, rho_A=0.929, CR=0.929, AVE=0.812
+[2026-02-14 20:01:20] [INFO]   CEV: Alpha=0.931, rho_A=0.933, CR=0.931, AVE=0.729
+[2026-02-14 20:01:20] [INFO]   AJ: Alpha=0.916, rho_A=0.918, CR=0.917, AVE=0.786
+[2026-02-14 20:01:20] [INFO] --- 6.3. Discriminant Validity (HTMT) ---
+[2026-02-14 20:01:20] [INFO]   HTMT(PS, COM) = 0.897 (formative pair — info only)
+[2026-02-14 20:01:20] [INFO]   HTMT(AQ, AJ) = 0.871 (formative pair — info only)
+[2026-02-14 20:01:20] [INFO]   HTMT(AQ, ETH) = 0.871 (formative pair — info only)
+[2026-02-14 20:01:20] [INFO] HTMT max (reflective pairs): 0.763
+[2026-02-14 20:01:20] [INFO] HTMT max (all pairs): 0.897
+[2026-02-14 20:01:20] [INFO] HTMT bootstrap CI saved
+[2026-02-14 20:01:20] [GATE] ✅ GATE [ Reflective Measurement ]: PASS
+[2026-02-14 20:01:20] [GATE]   Details: Reliability OK: TRUE, HTMT OK: TRUE
+[2026-02-14 20:01:20] [INFO] 
+[2026-02-14 20:01:20] [INFO] >>> Step 7: Formative/Composite Measurement Assessment (CCA Mode B)
+[2026-02-14 20:01:20] [INFO] --------------------------------------------------
+[2026-02-14 20:01:22] [INFO] --- 7.1. Outer VIF (Indicator Collinearity) ---
+[2026-02-14 20:01:22] [INFO]   COM → COM1: VIF = 3.522 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   COM → COM2: VIF = 3.563 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   COM → COM3: VIF = 3.285 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   COM → COM4: VIF = 1.998 [OK]
+[2026-02-14 20:01:22] [INFO]   COM → COM5: VIF = 2.589 [OK]
+[2026-02-14 20:01:22] [INFO]   COM → COM6: VIF = 2.185 [OK]
+[2026-02-14 20:01:22] [INFO]   COM → COM7: VIF = 2.401 [OK]
+[2026-02-14 20:01:22] [INFO]   COM → COM8: VIF = 2.772 [OK]
+[2026-02-14 20:01:22] [INFO]   COM → COM9: VIF = 2.701 [OK]
+[2026-02-14 20:01:22] [INFO]   MO → MO1: VIF = 2.579 [OK]
+[2026-02-14 20:01:22] [INFO]   MO → MO2: VIF = 2.481 [OK]
+[2026-02-14 20:01:22] [INFO]   MO → MO3: VIF = 1.658 [OK]
+[2026-02-14 20:01:22] [INFO]   MO → MO4: VIF = 1.905 [OK]
+[2026-02-14 20:01:22] [INFO]   MO → MO5: VIF = 1.526 [OK]
+[2026-02-14 20:01:22] [INFO]   CG → CG1: VIF = 2.458 [OK]
+[2026-02-14 20:01:22] [INFO]   CG → CG2: VIF = 2.447 [OK]
+[2026-02-14 20:01:22] [INFO]   CG → CG3: VIF = 2.688 [OK]
+[2026-02-14 20:01:22] [INFO]   CG → CG4: VIF = 2.873 [OK]
+[2026-02-14 20:01:22] [INFO]   CG → CG5: VIF = 2.955 [OK]
+[2026-02-14 20:01:22] [INFO]   CG → CG6: VIF = 1.734 [OK]
+[2026-02-14 20:01:22] [INFO]   CG → CG7: VIF = 3.003 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   CG → CG8: VIF = 3.294 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   CG → CG9: VIF = 3.325 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   ETH → ETH1: VIF = 3.771 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   ETH → ETH2: VIF = 4.385 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   ETH → ETH3: VIF = 5.223 [FAIL]
+[2026-02-14 20:01:22] [INFO]   ETH → ETH4: VIF = 3.842 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   TC → TC1: VIF = 1.949 [OK]
+[2026-02-14 20:01:22] [INFO]   TC → TC2: VIF = 2.485 [OK]
+[2026-02-14 20:01:22] [INFO]   TC → TC3: VIF = 2.621 [OK]
+[2026-02-14 20:01:22] [INFO]   TC → TC4: VIF = 4.063 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   TC → TC5: VIF = 4.928 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   TC → TC6: VIF = 3.948 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   AQ → AQ1: VIF = 2.953 [OK]
+[2026-02-14 20:01:22] [INFO]   AQ → AQ2: VIF = 2.573 [OK]
+[2026-02-14 20:01:22] [INFO]   AQ → AQ3: VIF = 3.080 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   AQ → AQ4: VIF = 3.387 [CAUTION]
+[2026-02-14 20:01:22] [INFO]   AQ → AQ5: VIF = 2.827 [OK]
+[2026-02-14 20:01:22] [INFO]   AQ → AQ6: VIF = 2.410 [OK]
+[2026-02-14 20:01:22] [INFO] --- 7.2. Outer Weights (Bootstrap) ---
+[2026-02-14 20:01:22] [INFO] INDICATOR [ COM1 ]: KEEP — Weight significant (t=2.006, p=0.066, CI[-0.015,0.377])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ COM2 ]: KEEP (content) — Weight ns (t=-0.493, p=0.710) but loading=0.788 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ COM3 ]: KEEP — Weight significant (t=2.904, p=0.010, CI[0.070,0.455])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ COM4 ]: KEEP — Weight significant (t=2.093, p=0.036, CI[0.010,0.282])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ COM5 ]: KEEP (content) — Weight ns (t=0.370, p=0.704) but loading=0.769 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ COM6 ]: REVIEW — Weight ns (t=-1.264), loading=0.499 < 0.50 — check content validity
+[2026-02-14 20:01:22] [INFO] INDICATOR [ COM7 ]: KEEP — Weight significant (t=1.985, p=0.048, CI[0.003,0.321])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ COM8 ]: KEEP — Weight significant (t=1.974, p=0.046, CI[0.005,0.408])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ COM9 ]: KEEP — Weight significant (t=3.224, p=0.001, CI[0.117,0.476])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ MO1 ]: KEEP (content) — Weight ns (t=1.128, p=0.264) but loading=0.790 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ MO2 ]: KEEP — Weight significant (t=3.202, p=0.004, CI[0.120,0.559])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ MO3 ]: KEEP — Weight significant (t=2.889, p=0.002, CI[0.106,0.541])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ MO4 ]: KEEP (content) — Weight ns (t=1.583, p=0.112) but loading=0.771 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ MO5 ]: KEEP — Weight significant (t=3.062, p=0.003, CI[0.097,0.476])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ CG1 ]: KEEP (content) — Weight ns (t=-0.561, p=0.588) but loading=0.669 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ CG2 ]: KEEP (content) — Weight ns (t=-0.076, p=0.960) but loading=0.677 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ CG3 ]: KEEP — Weight significant (t=2.949, p=0.005, CI[0.102,0.524])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ CG4 ]: KEEP (content) — Weight ns (t=0.974, p=0.326) but loading=0.741 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ CG5 ]: KEEP (content) — Weight ns (t=0.142, p=0.908) but loading=0.740 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ CG6 ]: KEEP (content) — Weight ns (t=0.451, p=0.613) but loading=0.588 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ CG7 ]: KEEP — Weight significant (t=2.535, p=0.011, CI[0.072,0.576])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ CG8 ]: KEEP (content) — Weight ns (t=0.351, p=0.716) but loading=0.833 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ CG9 ]: KEEP — Weight significant (t=2.586, p=0.014, CI[0.069,0.624])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ ETH1 ]: KEEP — Weight significant (t=3.534, p=0.000, CI[0.108,0.367])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ ETH2 ]: KEEP — Weight significant (t=4.597, p=0.000, CI[0.183,0.471])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ ETH3 ]: KEEP — Weight significant (t=1.962, p=0.044, CI[0.005,0.326])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ ETH4 ]: KEEP — Weight significant (t=5.494, p=0.000, CI[0.218,0.467])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ TC1 ]: KEEP — Weight significant (t=5.686, p=0.000, CI[0.416,0.872])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ TC2 ]: KEEP (content) — Weight ns (t=-1.576, p=0.138) but loading=0.648 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ TC3 ]: KEEP — Weight significant (t=4.415, p=0.001, CI[0.303,0.842])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ TC4 ]: KEEP (content) — Weight ns (t=-0.436, p=0.599) but loading=0.668 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ TC5 ]: KEEP (content) — Weight ns (t=0.413, p=0.654) but loading=0.698 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ TC6 ]: KEEP (content) — Weight ns (t=0.310, p=0.702) but loading=0.630 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ AQ1 ]: KEEP — Weight significant (t=4.173, p=0.000, CI[0.136,0.368])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ AQ2 ]: KEEP (content) — Weight ns (t=0.023, p=0.963) but loading=0.756 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ AQ3 ]: KEEP (content) — Weight ns (t=1.433, p=0.112) but loading=0.833 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] INDICATOR [ AQ4 ]: KEEP — Weight significant (t=5.871, p=0.000, CI[0.265,0.551])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ AQ5 ]: KEEP — Weight significant (t=4.484, p=0.000, CI[0.165,0.414])
+[2026-02-14 20:01:22] [INFO] INDICATOR [ AQ6 ]: KEEP (content) — Weight ns (t=1.247, p=0.200) but loading=0.761 >= 0.50; content important
+[2026-02-14 20:01:22] [INFO] --- 7.3. Nomological Validity ---
+[2026-02-14 20:01:22] [INFO] No global single items available — redundancy analysis not feasible
+[2026-02-14 20:01:22] [INFO] Assessing nomological validity via path relationships...
+[2026-02-14 20:01:22] [INFO]   COM relates to: AJ
+[2026-02-14 20:01:22] [INFO]   MO relates to: AJ
+[2026-02-14 20:01:22] [INFO]   CG relates to: AJ
+[2026-02-14 20:01:22] [INFO]   ETH relates to: AQ
+[2026-02-14 20:01:22] [INFO]   TC relates to: AQ
+[2026-02-14 20:01:22] [INFO]   AQ relates to: AJ, TC, ETH
+[2026-02-14 20:01:22] [GATE] ❌ GATE [ Formative Measurement ]: FAIL
+[2026-02-14 20:01:22] [GATE]   Details: VIF OK: FALSE, max VIF: 5.223
+[2026-02-14 20:01:22] [INFO] 
+[2026-02-14 20:01:22] [INFO] >>> Step 8: Higher-Order Construct Assessment
+[2026-02-14 20:01:22] [INFO] --------------------------------------------------
+[2026-02-14 20:01:22] [INFO] No higher-order constructs specified — skipping Step 8
+[2026-02-14 20:01:22] [GATE] ✅ GATE [ HOC Assessment ]: PASS
+[2026-02-14 20:01:22] [GATE]   Details: N/A — no HOC in model
+[2026-02-14 20:01:22] [INFO] 
+[2026-02-14 20:01:22] [INFO] === MEASUREMENT MODEL GATE: FAIL ❌ ===
+[2026-02-14 20:01:22] [WARN] Measurement model NOT passed — structural results should be interpreted with caution
+[2026-02-14 20:01:22] [INFO] 
+===== PHASE 3: STRUCTURAL MODEL & HYPOTHESES =====
+[2026-02-14 20:01:22] [INFO] 
+[2026-02-14 20:01:22] [INFO] >>> Step 9: Structural Model — In-sample Explanatory Power
+[2026-02-14 20:01:22] [INFO] --------------------------------------------------
+[2026-02-14 20:01:23] [INFO] --- 9.1. Inner VIF ---
+[2026-02-14 20:01:23] [INFO]   Inner VIF range: [1.380, 4.496]
+[2026-02-14 20:01:23] [INFO]     AJ: COM=4.50, PS=4.18, MO=2.07, TP=1.38, IT=2.14, CEV=2.77, CG=2.39
+[2026-02-14 20:01:23] [INFO]     AQ: AJ=2.83, TC=1.42, ETH=2.38
+[2026-02-14 20:01:23] [INFO] --- 9.2. Path Coefficients ---
+[2026-02-14 20:01:23] [INFO]   COM  ->  AJ: beta=0.174, t=1.893, CI[0.021, 0.384] ns
+[2026-02-14 20:01:23] [INFO]   PS  ->  AJ: beta=0.247, t=2.525, CI[0.049, 0.426] *
+[2026-02-14 20:01:23] [INFO]   MO  ->  AJ: beta=0.023, t=0.498, CI[-0.063, 0.120] ns
+[2026-02-14 20:01:23] [INFO]   TP  ->  AJ: beta=0.131, t=2.739, CI[0.036, 0.226] *
+[2026-02-14 20:01:23] [INFO]   IT  ->  AJ: beta=0.145, t=2.119, CI[-0.009, 0.266] *
+[2026-02-14 20:01:23] [INFO]   CEV  ->  AJ: beta=0.153, t=1.968, CI[-0.018, 0.287] *
+[2026-02-14 20:01:23] [INFO]   CG  ->  AJ: beta=0.144, t=2.590, CI[0.055, 0.272] *
+[2026-02-14 20:01:23] [INFO]   AJ  ->  AQ: beta=0.479, t=7.205, CI[0.350, 0.610] *
+[2026-02-14 20:01:23] [INFO]   TC  ->  AQ: beta=0.012, t=0.340, CI[-0.042, 0.093] ns
+[2026-02-14 20:01:23] [INFO]   ETH  ->  AQ: beta=0.459, t=7.250, CI[0.329, 0.575] *
+[2026-02-14 20:01:23] [INFO] --- 9.3. R-squared ---
+[2026-02-14 20:01:23] [INFO]   R²(AJ) = 0.710, Adj.R² = 0.705
+[2026-02-14 20:01:23] [INFO]   R²(AQ) = 0.801, Adj.R² = 0.799
+[2026-02-14 20:01:23] [INFO] --- 9.4. Effect Size (f²) ---
+[2026-02-14 20:01:23] [INFO]   f²(COM→AJ) = 0.020 [Small]
+[2026-02-14 20:01:23] [INFO]   f²(PS→AJ) = 0.040 [Small]
+[2026-02-14 20:01:23] [INFO]   f²(MO→AJ) = 0.001 [None]
+[2026-02-14 20:01:23] [INFO]   f²(TP→AJ) = 0.040 [Small]
+[2026-02-14 20:01:23] [INFO]   f²(IT→AJ) = 0.031 [Small]
+[2026-02-14 20:01:23] [INFO]   f²(CEV→AJ) = 0.025 [Small]
+[2026-02-14 20:01:23] [INFO]   f²(CG→AJ) = 0.029 [Small]
+[2026-02-14 20:01:23] [INFO]   f²(AJ→AQ) = 0.333 [Medium]
+[2026-02-14 20:01:23] [INFO]   f²(TC→AQ) = 0.001 [None]
+[2026-02-14 20:01:23] [INFO]   f²(ETH→AQ) = 0.356 [Large]
+[2026-02-14 20:01:23] [INFO] --- 9.5. SRMR (Reference) ---
+[2026-02-14 20:01:23] [GATE] ✅ GATE [ Structural In-sample ]: PASS
+[2026-02-14 20:01:23] [GATE]   Details: Inner VIF OK: TRUE
+[2026-02-14 20:01:23] [INFO] 
+[2026-02-14 20:01:23] [INFO] >>> Step 10: PLSpredict — Out-of-sample Predictive Power
+[2026-02-14 20:01:23] [INFO] --------------------------------------------------
+[2026-02-14 20:01:23] [INFO] PLSpredict: k=10 folds, 10 repetitions
+[2026-02-14 20:01:38] [INFO]   AJ1: Q²=0.137, RMSE(PLS=0.530 vs LM=0.570) ✓, MAE(PLS=0.426 vs LM=0.447) ✓
+[2026-02-14 20:01:38] [INFO]   AJ2: Q²=0.152, RMSE(PLS=0.529 vs LM=0.575) ✓, MAE(PLS=0.411 vs LM=0.443) ✓
+[2026-02-14 20:01:38] [INFO]   AJ3: Q²=0.041, RMSE(PLS=0.481 vs LM=0.491) ✓, MAE(PLS=0.377 vs LM=0.383) ✓
+[2026-02-14 20:01:38] [INFO]   AQ1: Q²=0.066, RMSE(PLS=0.467 vs LM=0.483) ✓, MAE(PLS=0.337 vs LM=0.352) ✓
+[2026-02-14 20:01:38] [INFO]   AQ2: Q²=0.047, RMSE(PLS=0.623 vs LM=0.638) ✓, MAE(PLS=0.433 vs LM=0.441) ✓
+[2026-02-14 20:01:38] [INFO]   AQ3: Q²=0.017, RMSE(PLS=0.502 vs LM=0.507) ✓, MAE(PLS=0.350 vs LM=0.348) ✗
+[2026-02-14 20:01:38] [INFO]   AQ4: Q²=0.039, RMSE(PLS=0.430 vs LM=0.438) ✓, MAE(PLS=0.285 vs LM=0.305) ✓
+[2026-02-14 20:01:38] [INFO]   AQ5: Q²=0.045, RMSE(PLS=0.488 vs LM=0.500) ✓, MAE(PLS=0.314 vs LM=0.327) ✓
+[2026-02-14 20:01:38] [INFO]   AQ6: Q²=0.025, RMSE(PLS=0.604 vs LM=0.612) ✓, MAE(PLS=0.469 vs LM=0.475) ✓
+[2026-02-14 20:01:38] [INFO] 
+Predictive power classification: HIGH
+[2026-02-14 20:01:38] [INFO]   PLS better RMSE: 9/9, MAE: 8/9
+[2026-02-14 20:01:38] [GATE] ✅ GATE [ PLSpredict ]: PASS
+[2026-02-14 20:01:38] [GATE]   Details: Q²_predict > 0 for 9/9 indicators, level: HIGH
+[2026-02-14 20:01:38] [INFO] 
+[2026-02-14 20:01:38] [INFO] >>> Step 11a: Mediation Analysis (Nitzl et al. 2016)
+[2026-02-14 20:01:38] [INFO] --------------------------------------------------
+[2026-02-14 20:01:38] [INFO] Mediator: AJ, Outcome: AQ
+[2026-02-14 20:01:38] [INFO] Antecedents: COM, PS, MO, TP, IT, CEV, CG
+[2026-02-14 20:01:38] [INFO] Decision rule: CI-based (95% percentile CI excludes 0)
+[2026-02-14 20:01:38] [INFO] Bootstrap: 5000 resamples, seed=42
+[2026-02-14 20:01:38] [INFO] --- 11a.1. Building saturated structural model ---
+[2026-02-14 20:01:38] [INFO] Adding direct paths: COM -> AQ, PS -> AQ, MO -> AQ, TP -> AQ, IT -> AQ, CEV -> AQ, CG -> AQ
+[2026-02-14 20:01:38] [INFO] --- 11a.2. Estimating saturated PLS + bootstrap ---
+[2026-02-14 20:01:38] [INFO] Saturated PLS model estimated successfully
+[2026-02-14 20:01:38] [INFO] Bootstrapping (5000 samples, seed=42)...
+[2026-02-14 20:02:57] [INFO] Saturated bootstrap complete
+[2026-02-14 20:02:57] [INFO] --- 11a.3. Validating saturated model paths ---
+[2026-02-14 20:02:57] [INFO]   All a, b, c' paths validated in saturated model
+[2026-02-14 20:02:57] [INFO] --- 11a.4. Mediation Classification ---
+[2026-02-14 20:02:57] [INFO] Testing: COM -> AJ -> AQ
+[2026-02-14 20:02:57] [INFO]   a (COM->AJ): 0.1596, CI[-0.0028, 0.3701]
+[2026-02-14 20:02:57] [INFO]   b (AJ->AQ): 0.4215, CI[0.2675, 0.5745]
+[2026-02-14 20:02:57] [INFO]   c' (COM->AQ): 0.1176, t=1.885, p=0.0580, CI[-0.0046, 0.2495], ns
+[2026-02-14 20:02:57] [INFO]   Indirect a*b: 0.0672, t=1.743, p=0.0544, CI[-0.0012, 0.1709], ns
+[2026-02-14 20:02:57] [INFO]   Total: 0.1849, CI[0.0599, 0.3441]
+[2026-02-14 20:02:57] [INFO]   VAF: 36.4% (descriptive only)
+[2026-02-14 20:02:57] [INFO]   => No-effect
+[2026-02-14 20:02:57] [INFO] 
+[2026-02-14 20:02:57] [INFO] Testing: PS -> AJ -> AQ
+[2026-02-14 20:02:57] [INFO]   a (PS->AJ): 0.2579, CI[0.0616, 0.4457]
+[2026-02-14 20:02:57] [INFO]   b (AJ->AQ): 0.4215, CI[0.2675, 0.5745]
+[2026-02-14 20:02:57] [INFO]   c' (PS->AQ): -0.0118, t=-0.143, p=0.8884, CI[-0.1429, 0.1198], ns
+[2026-02-14 20:02:57] [INFO]   Indirect a*b: 0.1087, t=2.246, p=0.0088, CI[0.0243, 0.2008], SIG
+[2026-02-14 20:02:57] [INFO]   Total: 0.0970, CI[-0.0488, 0.2448]
+[2026-02-14 20:02:57] [INFO]   VAF: 112.1% (descriptive only)
+[2026-02-14 20:02:57] [INFO]   => Indirect-only (full mediation)
+[2026-02-14 20:02:57] [INFO] 
+[2026-02-14 20:02:57] [INFO] Testing: MO -> AJ -> AQ
+[2026-02-14 20:02:57] [INFO]   a (MO->AJ): 0.0320, CI[-0.0577, 0.1280]
+[2026-02-14 20:02:57] [INFO]   b (AJ->AQ): 0.4215, CI[0.2675, 0.5745]
+[2026-02-14 20:02:57] [INFO]   c' (MO->AQ): -0.0314, t=-0.817, p=0.4084, CI[-0.0956, 0.0408], ns
+[2026-02-14 20:02:57] [INFO]   Indirect a*b: 0.0135, t=0.728, p=0.4504, CI[-0.0244, 0.0552], ns
+[2026-02-14 20:02:57] [INFO]   Total: -0.0179, CI[-0.0841, 0.0617]
+[2026-02-14 20:02:57] [INFO]   => No-effect
+[2026-02-14 20:02:57] [INFO] 
+[2026-02-14 20:02:57] [INFO] Testing: TP -> AJ -> AQ
+[2026-02-14 20:02:57] [INFO]   a (TP->AJ): 0.1329, CI[0.0375, 0.2306]
+[2026-02-14 20:02:57] [INFO]   b (AJ->AQ): 0.4215, CI[0.2675, 0.5745]
+[2026-02-14 20:02:57] [INFO]   c' (TP->AQ): -0.0389, t=-1.194, p=0.2224, CI[-0.1029, 0.0233], ns
+[2026-02-14 20:02:57] [INFO]   Indirect a*b: 0.0560, t=2.485, p=0.0040, CI[0.0154, 0.1016], SIG
+[2026-02-14 20:02:57] [INFO]   Total: 0.0171, CI[-0.0494, 0.0854]
+[2026-02-14 20:02:57] [INFO]   => Indirect-only (full mediation)
+[2026-02-14 20:02:57] [INFO] 
+[2026-02-14 20:02:57] [INFO] Testing: IT -> AJ -> AQ
+[2026-02-14 20:02:58] [INFO]   a (IT->AJ): 0.1492, CI[-0.0044, 0.2724]
+[2026-02-14 20:02:58] [INFO]   b (AJ->AQ): 0.4215, CI[0.2675, 0.5745]
+[2026-02-14 20:02:58] [INFO]   c' (IT->AQ): -0.0061, t=-0.104, p=0.9184, CI[-0.1012, 0.0919], ns
+[2026-02-14 20:02:58] [INFO]   Indirect a*b: 0.0629, t=1.796, p=0.0556, CI[-0.0017, 0.1240], ns
+[2026-02-14 20:02:58] [INFO]   Total: 0.0567, CI[-0.0528, 0.1579]
+[2026-02-14 20:02:58] [INFO]   VAF: 110.8% (descriptive only)
+[2026-02-14 20:02:58] [INFO]   => No-effect
+[2026-02-14 20:02:58] [INFO] 
+[2026-02-14 20:02:58] [INFO] Testing: CEV -> AJ -> AQ
+[2026-02-14 20:02:58] [INFO]   a (CEV->AJ): 0.1561, CI[-0.0213, 0.2988]
+[2026-02-14 20:02:58] [INFO]   b (AJ->AQ): 0.4215, CI[0.2675, 0.5745]
+[2026-02-14 20:02:58] [INFO]   c' (CEV->AQ): 0.1169, t=1.815, p=0.0684, CI[-0.0098, 0.2426], ns
+[2026-02-14 20:02:58] [INFO]   Indirect a*b: 0.0658, t=1.630, p=0.0800, CI[-0.0087, 0.1340], ns
+[2026-02-14 20:02:58] [INFO]   Total: 0.1827, CI[0.0443, 0.3072]
+[2026-02-14 20:02:58] [INFO]   VAF: 36.0% (descriptive only)
+[2026-02-14 20:02:58] [INFO]   => No-effect
+[2026-02-14 20:02:58] [INFO] 
+[2026-02-14 20:02:58] [INFO] Testing: CG -> AJ -> AQ
+[2026-02-14 20:02:58] [INFO]   a (CG->AJ): 0.1254, CI[0.0317, 0.2518]
+[2026-02-14 20:02:58] [INFO]   b (AJ->AQ): 0.4215, CI[0.2675, 0.5745]
+[2026-02-14 20:02:58] [INFO]   c' (CG->AQ): 0.0602, t=1.386, p=0.1668, CI[-0.0271, 0.1478], ns
+[2026-02-14 20:02:58] [INFO]   Indirect a*b: 0.0528, t=2.203, p=0.0100, CI[0.0121, 0.1135], SIG
+[2026-02-14 20:02:58] [INFO]   Total: 0.1130, CI[0.0267, 0.2142]
+[2026-02-14 20:02:58] [INFO]   VAF: 46.7% (descriptive only)
+[2026-02-14 20:02:58] [INFO]   => Indirect-only (full mediation)
+[2026-02-14 20:02:58] [INFO] 
+[2026-02-14 20:02:58] [INFO] Mediation results exported:
+[2026-02-14 20:02:58] [INFO]   08_complex/mediation/specific_indirect_effects.csv (full)
+[2026-02-14 20:02:58] [INFO]   08_complex/mediation/mediation_classification.csv (summary)
+[2026-02-14 20:02:58] [INFO]   10_report/mediation_classification_saturated.csv (thesis-ready)
+[2026-02-14 20:02:58] [INFO] 
+[2026-02-14 20:02:58] [INFO] Methodology notes:
+[2026-02-14 20:02:58] [INFO]   - Saturated model: 7 direct paths added to base model
+[2026-02-14 20:02:58] [INFO]   - Indirect effect inference: bootstrap product a_boot[i]*b_boot[i]
+[2026-02-14 20:02:58] [INFO]   - CI method: percentile (2.5%, 97.5%)
+[2026-02-14 20:02:58] [INFO]   - Primary significance rule: CI excludes 0
+[2026-02-14 20:02:58] [INFO]   - Classification: Nitzl et al. (2016) / Zhao et al. (2010)
+[2026-02-14 20:02:58] [INFO]   - Reproducibility: seed=42, B=5000
+[2026-02-14 20:02:58] [INFO] 
+[2026-02-14 20:02:58] [INFO] >>> Step 11b: Moderation Analysis
+[2026-02-14 20:02:58] [INFO] --------------------------------------------------
+[2026-02-14 20:02:58] [INFO] Building moderation model with 2 interaction(s)...
+[2026-02-14 20:02:58] [INFO]   Pre-flight checks PASSED
+[2026-02-14 20:02:58] [INFO] --- Strategy A: SEMinR native interaction_term ---
+[2026-02-14 20:02:58] [INFO]   [Native] Trying method: two_stage
+[2026-02-14 20:02:58] [WARN]     Failed (two_stage): missing value where TRUE/FALSE needed
+[2026-02-14 20:02:58] [INFO]   [Native] Trying method: orthogonal
+[2026-02-14 20:02:58] [WARN]     Failed (orthogonal): missing value where TRUE/FALSE needed
+[2026-02-14 20:02:58] [INFO]   [Native] Trying method: product_indicator
+[2026-02-14 20:02:58] [WARN]     Failed (product_indicator): missing value where TRUE/FALSE needed
+[2026-02-14 20:02:58] [INFO] --- Strategy B: Manual two-stage approach ---
+[2026-02-14 20:02:58] [INFO]   SEMinR interaction_term fails with mixed reflective IV + formative moderator. Using manual two-stage: scores from base model -> interaction terms -> re-estimate.
+[2026-02-14 20:02:58] [INFO]   [Manual two-stage] Stage 1: Estimating base model for construct scores...
+[2026-02-14 20:02:58] [INFO]     Stage 1 complete: 11 construct scores extracted
+[2026-02-14 20:02:58] [INFO]   [Manual two-stage] Stage 2: Creating interaction terms from scores...
+[2026-02-14 20:02:58] [INFO]     Created: AJ*TC (N=365, M=0.543, SD=1.947)
+[2026-02-14 20:02:58] [INFO]     Created: AJ*ETH (N=365, M=0.760, SD=2.994)
+[2026-02-14 20:02:58] [INFO]     Stage 2 PLS model estimated successfully
+[2026-02-14 20:02:58] [INFO]     Bootstrapping stage 2 (5000 samples)...
+[2026-02-14 20:03:09] [INFO]     Bootstrap complete
+[2026-02-14 20:03:10] [INFO] 
+--- Extracting results (method: manual_two_stage) ---
+[2026-02-14 20:03:10] [INFO] 
+--- Result: AJ * TC → AQ ---
+[2026-02-14 20:03:10] [INFO]   IV direct  (AJ→AQ): beta=0.392, t=7.753
+[2026-02-14 20:03:10] [INFO]   Mod direct (TC→AQ): beta=0.034, t=1.095
+[2026-02-14 20:03:10] [INFO]   Interaction (AJ*TC→AQ): beta=0.054, t=2.055, 95% CI[-0.006,0.102] (percentile bootstrap) not significant
+[2026-02-14 20:03:10] [INFO]   Computing simple slopes...
+[2026-02-14 20:03:10] [INFO]   Slopes: Low=0.338, Med=0.392, High=0.446
+[2026-02-14 20:03:10] [INFO]   Plot saved: 08_complex/moderation/moderation_plots/mod_AJ_x_TC.png
+[2026-02-14 20:03:10] [INFO] 
+--- Result: AJ * ETH → AQ ---
+[2026-02-14 20:03:10] [INFO]   IV direct  (AJ→AQ): beta=0.392, t=7.753
+[2026-02-14 20:03:10] [INFO]   Mod direct (ETH→AQ): beta=0.473, t=8.986
+[2026-02-14 20:03:10] [INFO]   Interaction (AJ*ETH→AQ): beta=-0.056, t=-2.657, 95% CI[-0.095,-0.010] (percentile bootstrap) SIGNIFICANT
+[2026-02-14 20:03:10] [INFO]   Computing simple slopes...
+[2026-02-14 20:03:10] [INFO]   Slopes: Low=0.448, Med=0.392, High=0.336
+[2026-02-14 20:03:10] [INFO]   Plot saved: 08_complex/moderation/moderation_plots/mod_AJ_x_ETH.png
+[2026-02-14 20:03:10] [INFO] 
+--- Moderation Summary ---
+[2026-02-14 20:03:10] [INFO]   Method used: manual_two_stage
+[2026-02-14 20:03:10] [INFO]   AJ * TC → AQ: beta=0.054, not significant
+[2026-02-14 20:03:10] [INFO]   AJ * ETH → AQ: beta=-0.056, SIGNIFICANT
+[2026-02-14 20:03:10] [INFO] Moderation results saved (method: manual_two_stage)
+[2026-02-14 20:03:10] [GATE] ✅ GATE [ Moderation ]: PASS
+[2026-02-14 20:03:10] [GATE]   Details: 2 interaction(s) tested via manual_two_stage
+[2026-02-14 20:03:10] [INFO] 
+===== PHASE 4: ROBUSTNESS & REPORTING =====
+[2026-02-14 20:03:10] [INFO] 
+[2026-02-14 20:03:10] [INFO] >>> Step 12: Robustness, Sensitivity & Supplementary Tests
+[2026-02-14 20:03:10] [INFO] --------------------------------------------------
+[2026-02-14 20:03:10] [INFO] --- A. Data Sensitivity: Pre vs Post Screening ---
+[2026-02-14 20:03:43] [INFO]   Sign stable: 10/10, Significance stable: 10/10
+[2026-02-14 20:03:43] [INFO] --- B. MICOM & MGA ---
+[2026-02-14 20:03:43] [INFO]   Company groups: 225 unique
+[2026-02-14 20:03:43] [INFO]   MICOM-MGA: requires group variable definition and minimum group size
+[2026-02-14 20:03:43] [INFO]   If groups are defined and N >= 30-50 per group:
+[2026-02-14 20:03:43] [INFO]     Step 1: Configural invariance — same model specification
+[2026-02-14 20:03:43] [INFO]     Step 2: Compositional invariance — permutation test
+[2026-02-14 20:03:43] [INFO]     Step 3: Equal mean/variance — permutation test
+[2026-02-14 20:03:43] [INFO]     Then: MGA if MICOM passes
+[2026-02-14 20:03:43] [INFO]   IMPLEMENTATION: Requires manual group coding — placeholder for now
+[2026-02-14 20:03:43] [INFO] --- C. Endogeneity Assessment ---
+[2026-02-14 20:03:43] [INFO]   Non-normal indicators: 9/9
+[2026-02-14 20:03:43] [INFO]   Non-normal distribution detected — Gaussian Copula may be applicable
+[2026-02-14 20:03:43] [INFO]   NOTE: Gaussian Copula requires custom implementation
+[2026-02-14 20:03:43] [INFO]   Fallback: control variables + theoretical argumentation + spec sensitivity
+[2026-02-14 20:03:43] [INFO] --- D. FIMIX-PLS (Optional) ---
+[2026-02-14 20:03:43] [INFO]   FIMIX-PLS: not implemented in seminr — requires SmartPLS or custom code
+[2026-02-14 20:03:43] [INFO]   Status: conditional — only if unobserved heterogeneity suspected
+[2026-02-14 20:03:43] [GATE] ✅ GATE [ Robustness ]: PASS
+[2026-02-14 20:03:43] [GATE]   Details: Robustness checks completed (some items conditional on data)
+[2026-02-14 20:03:43] [INFO] 
+[2026-02-14 20:03:43] [INFO] >>> Step 13: Report Export — Thesis-Ready Tables & Figures
+[2026-02-14 20:03:43] [INFO] --------------------------------------------------
+[2026-02-14 20:03:44] [INFO] Table: QC Summary created
+[2026-02-14 20:03:44] [INFO] Table: Descriptive Statistics created
+[2026-02-14 20:03:44] [INFO] Table: Demographics created
+[2026-02-14 20:03:44] [INFO] Table: CMV Assessment created
+[2026-02-14 20:03:44] [INFO] Table: Outer Loadings created
+[2026-02-14 20:03:44] [INFO] Table: Reliability & Validity created
+[2026-02-14 20:03:44] [INFO] Table: HTMT Matrix created
+[2026-02-14 20:03:44] [INFO] Table: Path Coefficients created
+[2026-02-14 20:03:45] [INFO] Table: R² and f² created
+[2026-02-14 20:03:45] [INFO] Table: PLSpredict created
+[2026-02-14 20:03:45] [INFO] Table: Mediation Classification created (saturated model)
+[2026-02-14 20:03:45] [INFO] Table: Mediation Full Results created
+[2026-02-14 20:03:45] [INFO] Table: Moderation created
+[2026-02-14 20:03:50] [INFO] All 14 tables exported to: 10_report/main/all_tables.docx
+[2026-02-14 20:03:50] [INFO] Report export complete
+[2026-02-14 20:03:50] [INFO] 
+========================================
+[2026-02-14 20:03:50] [INFO] PIPELINE SUMMARY (MAIN)
+[2026-02-14 20:03:50] [INFO] ========================================
+[2026-02-14 20:03:50] [INFO] Final sample: 365 observations
+[2026-02-14 20:03:50] [INFO] Constructs: 11 total (5 reflective, 6 formative)
+[2026-02-14 20:03:50] [INFO] Measurement gate: FAIL
+[2026-02-14 20:03:50] [INFO] Structural VIF gate: PASS
+[2026-02-14 20:03:50] [INFO] PLSpredict gate: PASS
+[2026-02-14 20:03:50] [INFO] Instrument locked: YES (from pilot)
+[2026-02-14 20:03:50] [INFO] ========================================
+[2026-02-14 20:03:50] [INFO] 
+[2026-02-14 20:03:50] [INFO] ========================================
+[2026-02-14 20:03:50] [INFO] Pipeline log closed
+[2026-02-14 20:03:50] [INFO] Total time: 3.8 minutes
+[2026-02-14 20:03:50] [INFO] Gates: 10 passed, 2 failed (total: 12)
+[2026-02-14 20:03:50] [INFO]   ✅ Tech Validation — All expected columns present
+[2026-02-14 20:03:50] [INFO]   ✅ Behavioral QC — N=365, minimum required=90
+[2026-02-14 20:03:50] [INFO]   ✅ Missing Data — Remaining NA: 0, method: mean
+[2026-02-14 20:03:50] [INFO]   ✅ Descriptives — PASS with warnings — skew/kurtosis anomalies noted (acceptable for Likert data)
+[2026-02-14 20:03:50] [INFO]   ❌ CMV/CMB — Max full collinearity VIF: 5.082 >= 5.0 (serious CMV concern)
+[2026-02-14 20:03:50] [INFO]   ✅ Reflective Measurement — Reliability OK: TRUE, HTMT OK: TRUE
+[2026-02-14 20:03:50] [INFO]   ❌ Formative Measurement — VIF OK: FALSE, max VIF: 5.223
+[2026-02-14 20:03:50] [INFO]   ✅ HOC Assessment — N/A — no HOC in model
+[2026-02-14 20:03:50] [INFO]   ✅ Structural In-sample — Inner VIF OK: TRUE
+[2026-02-14 20:03:50] [INFO]   ✅ PLSpredict — Q²_predict > 0 for 9/9 indicators, level: HIGH
+[2026-02-14 20:03:50] [INFO]   ✅ Moderation — 2 interaction(s) tested via manual_two_stage
+[2026-02-14 20:03:50] [INFO]   ✅ Robustness — Robustness checks completed (some items conditional on data)
+[2026-02-14 20:03:50] [INFO] ========================================

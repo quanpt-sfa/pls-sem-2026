@@ -1,0 +1,52 @@
+# ==============================================================================
+# robustness_nonlinear.yml — Quadratic / Nonlinear Effects Check
+# ==============================================================================
+# Standalone config for the nonlinear robustness module.
+# Does NOT modify main.yml or analysis_config.yaml.
+#
+# Purpose: Test whether adding quadratic (X²) terms changes the linear
+#          conclusions from the base PLS-SEM model.
+# Method:  Two-stage score-based approach (Henseler & Chin, 2010):
+#            Stage 1: Construct scores from base PLS model (SEMinR)
+#            Stage 2: OLS/bootstrap regression with X + X² terms
+# ==============================================================================
+
+enabled: true
+
+# --- Estimation parameters ---
+# Defaults match MAIN pipeline; override here if needed.
+seed: 18
+bootstrap_samples: 5000
+confidence_level: 0.95
+
+# --- Centering method for X before computing X² ---
+# Options: "mean_center" (default), "z_score"
+center_method: "mean_center"
+
+# --- Relations to test ---
+# Each entry: X (predictor construct) → Y (endogenous construct)
+# Keep to 1–3 core relations to avoid alpha inflation.
+# Rationale for defaults:
+#   COM→AJ : largest formative predictor of AJ; theory suggests diminishing returns
+#   AJ→AQ  : main mediation hub; check if marginal-returns curve flattens
+#   ETH→AQ : strong direct effect; ethics norms may plateau at high levels
+relations:
+  - iv: "COM"
+    dv: "AJ"
+    label: "Competence → Audit Judgment"
+  - iv: "AJ"
+    dv: "AQ"
+    label: "Audit Judgment → Audit Quality"
+  - iv: "ETH"
+    dv: "AQ"
+    label: "Ethics → Audit Quality"
+
+# --- Input artifacts (from base pipeline) ---
+# Module reads these; never writes to them.
+inputs:
+  pls_model_path: "06_structural/pls_model.rds"
+  data_path: "02_clean/analysis_ready.rds"
+  active_indicators_path: "06_structural/active_indicators.rds"
+
+# --- Output directory ---
+output_dir: "09_robust/nonlinear"

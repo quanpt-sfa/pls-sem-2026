@@ -1,0 +1,3 @@
+"Interaction","IV","Moderator","DV","Method","IV_Direct_Beta","IV_Direct_CI_Low","IV_Direct_CI_High","Mod_Direct_Beta","Mod_Direct_CI_Low","Mod_Direct_CI_High","Interaction_Beta","Interaction_T","Interaction_P","Interaction_CI_Low","Interaction_CI_High","CI_Level","CI_Method","Sig_Primary","T_Sig","P_Sig","CI_Excludes_Zero","Mismatch","Significant","Notes"
+"AJ * TC → AQ","AJ","TC","AQ","manual_two_stage",0.393,0.3,0.491,0.046,-0.01,0.11,0.052,2.014,0.0832,-0.009,0.098,"95%","percentile bootstrap",FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,"CI vs t/p mismatch; CI used for decision"
+"AJ * ETH → AQ","AJ","ETH","AQ","manual_two_stage",0.393,0.3,0.491,0.462,0.363,0.559,-0.053,-2.632,0.0232,-0.091,-0.008,"95%","percentile bootstrap",TRUE,TRUE,TRUE,TRUE,FALSE,TRUE,""

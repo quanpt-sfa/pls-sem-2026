@@ -1,0 +1,87 @@
+{
+  "timestamp": "2026-02-14T23:20:42",
+  "git_commit": null,
+  "r_version": "R version 4.4.3 (2025-02-28 ucrt)",
+  "seed": 42,
+  "n_constructs": 11,
+  "constructs": [
+    {
+      "name": "COM",
+      "full_name": "Auditor Competence",
+      "measurement_type": "formative",
+      "original_indicators": ["COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9"],
+      "active_indicators": ["COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9"]
+    },
+    {
+      "name": "PS",
+      "full_name": "Professional Skepticism",
+      "measurement_type": "reflective",
+      "original_indicators": ["PS1", "PS2", "PS3", "PS4", "PS5"],
+      "active_indicators": ["PS1", "PS2", "PS3", "PS4", "PS5"]
+    },
+    {
+      "name": "MO",
+      "full_name": "Motivation",
+      "measurement_type": "formative",
+      "original_indicators": ["MO1", "MO2", "MO3", "MO4", "MO5"],
+      "active_indicators": ["MO1", "MO2", "MO3", "MO4", "MO5"]
+    },
+    {
+      "name": "TP",
+      "full_name": "Time Budget Pressure",
+      "measurement_type": "reflective",
+      "original_indicators": ["TP1", "TP2", "TP3", "TP4"],
+      "active_indicators": ["TP1", "TP2", "TP3", "TP4"]
+    },
+    {
+      "name": "IT",
+      "full_name": "Use Information Technology",
+      "measurement_type": "reflective",
+      "original_indicators": ["IT1", "IT2", "IT3", "IT4"],
+      "active_indicators": ["IT1", "IT2", "IT3", "IT4"]
+    },
+    {
+      "name": "CEV",
+      "full_name": "Corporate Ethical Values",
+      "measurement_type": "reflective",
+      "original_indicators": ["CEV1", "CEV2", "CEV3", "CEV4", "CEV5"],
+      "active_indicators": ["CEV1", "CEV2", "CEV3", "CEV4", "CEV5"]
+    },
+    {
+      "name": "CG",
+      "full_name": "Corporate Governance",
+      "measurement_type": "formative",
+      "original_indicators": ["CG1", "CG2", "CG3", "CG4", "CG5", "CG6", "CG7", "CG8", "CG9"],
+      "active_indicators": ["CG1", "CG2", "CG3", "CG4", "CG5", "CG6", "CG7", "CG8", "CG9"]
+    },
+    {
+      "name": "ETH",
+      "full_name": "Professional Ethics",
+      "measurement_type": "formative",
+      "original_indicators": ["ETH1", "ETH2", "ETH3", "ETH4"],
+      "active_indicators": ["ETH1", "ETH2", "ETH3", "ETH4"]
+    },
+    {
+      "name": "TC",
+      "full_name": "Task Complexity",
+      "measurement_type": "formative",
+      "original_indicators": ["TC1", "TC2", "TC3", "TC4", "TC5", "TC6"],
+      "active_indicators": ["TC1", "TC2", "TC3", "TC4", "TC5", "TC6"]
+    },
+    {
+      "name": "AJ",
+      "full_name": "Audit Judgment",
+      "measurement_type": "reflective",
+      "original_indicators": ["AJ1", "AJ2", "AJ3"],
+      "active_indicators": ["AJ1", "AJ2", "AJ3"]
+    },
+    {
+      "name": "AQ",
+      "full_name": "Audit Quality",
+      "measurement_type": "formative",
+      "original_indicators": ["AQ1", "AQ2", "AQ3", "AQ4", "AQ5", "AQ6"],
+      "active_indicators": ["AQ1", "AQ2", "AQ3", "AQ4", "AQ5", "AQ6"]
+    }
+  ],
+  "removed_items": []
+}

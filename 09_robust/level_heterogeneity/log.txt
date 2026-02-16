@@ -1,0 +1,122 @@
+[2026-02-16 02:02:15] [INFO ] ========================================================
+[2026-02-16 02:02:15] [INFO ] Sensitivity Analysis for Level-based Heterogeneity
+[2026-02-16 02:02:15] [INFO ] Started: 2026-02-16 02:02:15
+[2026-02-16 02:02:15] [INFO ] R version: R version 4.4.3 (2025-02-28 ucrt)
+[2026-02-16 02:02:15] [INFO ] ========================================================
+[2026-02-16 02:02:15] [INFO ] Config: R/09_robust_level_heterogeneity/00_config_template.yml
+[2026-02-16 02:02:15] [INFO ] Output: 09_robust/level_heterogeneity
+[2026-02-16 02:02:15] [INFO ] Seed: 18
+[2026-02-16 02:02:15] [INFO ] Backend: auto
+[2026-02-16 02:02:15] [INFO ] 
+[2026-02-16 02:02:15] [STEP ] >>> Step 0 — Backend Detection & Data Loading
+[2026-02-16 02:02:15] [INFO ] ------------------------------------------------------------
+[2026-02-16 02:02:15] [INFO ] Loading PLS model from 06_structural/pls_model.rds
+[2026-02-16 02:02:15] [INFO ]   seminr model loaded: 400 obs, 11 constructs
+[2026-02-16 02:02:15] [INFO ]   Boot model loaded from 06_structural/boot_model.rds
+[2026-02-16 02:02:15] [INFO ]   Active indicators loaded (11 constructs)
+[2026-02-16 02:02:15] [INFO ] Loading raw data from 02_clean/analysis_ready.rds
+[2026-02-16 02:02:15] [INFO ]   Data: 400 rows × 73 cols
+[2026-02-16 02:02:15] [INFO ]   Base analysis config loaded: 00_meta/analysis_config.yaml
+[2026-02-16 02:02:15] [INFO ] Backend selected: seminr
+[2026-02-16 02:02:15] [INFO ] 
+[2026-02-16 02:02:15] [STEP ] >>> Step 1 — Exogenous Construct Scores & Clustering
+[2026-02-16 02:02:15] [INFO ] ------------------------------------------------------------
+[2026-02-16 02:02:15] [INFO ] Available constructs: COM, PS, MO, TP, IT, CEV, CG, AJ, TC, ETH, AQ
+[2026-02-16 02:02:15] [INFO ] Exogenous scores: 400 obs × 9 constructs (COM, PS, MO, TP, IT, CEV, CG, TC, ETH)
+[2026-02-16 02:02:15] [INFO ]   Scores mean-centred
+[2026-02-16 02:02:15] [INFO ]   Scores z-standardised
+[2026-02-16 02:02:15] [INFO ] Clustering method: kmeans, k candidates: 2, 3, 4, 5
+[2026-02-16 02:02:15] [INFO ]   k=2  WSS=2502.5  Silhouette=0.297
+[2026-02-16 02:02:15] [INFO ]   k=3  WSS=1739.2  Silhouette=0.281
+[2026-02-16 02:02:15] [INFO ]   k=4  WSS=1523.1  Silhouette=0.196
+[2026-02-16 02:02:16] [INFO ]   k=5  WSS=1398.7  Silhouette=0.189
+[2026-02-16 02:02:16] [INFO ] Optimal k = 2 (silhouette criterion)
+[2026-02-16 02:02:16] [INFO ]   Group sizes: 261 / 139
+[2026-02-16 02:02:16] [INFO ]   Saved: tables/clustering_k_selection.csv
+[2026-02-16 02:02:16] [INFO ]   Saved: tables/groups.csv (400 observations)
+[2026-02-16 02:02:16] [INFO ]   Elbow plot saved
+[2026-02-16 02:02:16] [INFO ]   Silhouette plot saved
+[2026-02-16 02:02:16] [GATE ] [GATE] Clustering: PASS k=2, n_groups=261/139
+[2026-02-16 02:02:16] [INFO ] 
+[2026-02-16 02:02:16] [STEP ] >>> Step 2 — MICOM (Measurement Invariance of Composite Models)
+[2026-02-16 02:02:16] [INFO ] ------------------------------------------------------------
+[2026-02-16 02:02:16] [INFO ]   Permutations: 5000 | Alpha: 0.05 | Seed: 18
+[2026-02-16 02:02:16] [INFO ]   Method: cSEM::testMICOM() (Henseler et al., 2016)
+[2026-02-16 02:02:16] [INFO ]   cSEM version: 0.6.1
+[2026-02-16 02:02:16] [INFO ]   cSEM model syntax: 11 measurement + 2 structural equations
+[2026-02-16 02:02:16] [INFO ]   Group pairs to test: 1
+[2026-02-16 02:02:16] [INFO ] 
+  --- Group_1_vs_2 ---
+[2026-02-16 02:02:16] [INFO ]     n1=261, n2=139
+[2026-02-16 02:02:16] [INFO ]     Step 1 (Configural): ASSUMED — same model spec for both groups.
+[2026-02-16 02:02:16] [INFO ]     Running cSEM multi-group estimation...
+[2026-02-16 02:02:16] [WARN ]     WARNING: cSEM reports admissibility issues in one or both groups.
+[2026-02-16 02:02:16] [INFO ]     Running cSEM::testMICOM() with 5000 permutations...
+[2026-02-16 02:05:47] [INFO ]     cSEM MICOM completed.
+[2026-02-16 02:05:48] [INFO ]     Step 2 c-values: COM=0.8625, PS=0.9986, MO=0.8457, TP=0.9946, IT=0.9992, CEV=0.9997, CG=0.8396, TC=0.8439, ETH=0.9683, AJ=0.9998, AQ=0.9786
+[2026-02-16 02:05:48] [INFO ]     Step 2 result: FAIL (some constructs NOT compositional invariant)
+[2026-02-16 02:05:48] [INFO ]     Step 3: 11 constructs differ in means, 9 in variances
+[2026-02-16 02:05:48] [GATE ] [GATE] MICOM Step 2 (Compositional Invariance): FAIL — at least one pair FAILED
+[2026-02-16 02:05:48] [INFO ]   Saved: tables/micom_results.csv
+[2026-02-16 02:05:48] [INFO ]   MICOM tables saved.
+[2026-02-16 02:05:48] [INFO ] 
+[2026-02-16 02:05:48] [STEP ] >>> Step 3 — Permutation Multi-Group Analysis (MGA)
+[2026-02-16 02:05:48] [INFO ] ------------------------------------------------------------
+[2026-02-16 02:05:48] [WARN ]   WARNING: MICOM Step 2 FAILED — compositional invariance NOT established. MGA results are EXPLORATORY ONLY.
+[2026-02-16 02:05:48] [INFO ]   Permutations: 5000 | Alpha: 0.05 | Adjust: holm
+[2026-02-16 02:05:48] [INFO ]   Paths to test: 10
+[2026-02-16 02:05:48] [INFO ]   Estimating PLS model per group...
+[2026-02-16 02:05:48] [INFO ]     Group 1: n = 261
+[2026-02-16 02:07:12] [INFO ]     Group 2: n = 139
+[2026-02-16 02:08:18] [INFO ] 
+  --- G1_vs_G2 ---
+[2026-02-16 02:08:18] [INFO ]     Running 5000 permutations...
+[2026-02-16 02:09:01] [INFO ]       Permutation 500 / 5000
+[2026-02-16 02:09:44] [INFO ]       Permutation 1000 / 5000
+[2026-02-16 02:10:28] [INFO ]       Permutation 1500 / 5000
+[2026-02-16 02:11:11] [INFO ]       Permutation 2000 / 5000
+[2026-02-16 02:11:54] [INFO ]       Permutation 2500 / 5000
+[2026-02-16 02:12:40] [INFO ]       Permutation 3000 / 5000
+[2026-02-16 02:13:23] [INFO ]       Permutation 3500 / 5000
+[2026-02-16 02:14:04] [INFO ]       Permutation 4000 / 5000
+[2026-02-16 02:14:47] [INFO ]       Permutation 4500 / 5000
+[2026-02-16 02:15:29] [INFO ]       Permutation 5000 / 5000
+[2026-02-16 02:15:29] [INFO ]     COM -> AJ: diff=-0.251  p=0.2176
+[2026-02-16 02:15:29] [INFO ]     PS -> AJ: diff=0.083  p=0.7560
+[2026-02-16 02:15:29] [INFO ]     MO -> AJ: diff=-0.003  p=0.9420
+[2026-02-16 02:15:29] [INFO ]     TP -> AJ: diff=0.003  p=0.9728
+[2026-02-16 02:15:29] [INFO ]     IT -> AJ: diff=-0.084  p=0.4856
+[2026-02-16 02:15:29] [INFO ]     CEV -> AJ: diff=0.144  p=0.4560
+[2026-02-16 02:15:29] [INFO ]     CG -> AJ: diff=0.044  p=0.5284
+[2026-02-16 02:15:29] [INFO ]     AJ -> AQ: diff=-0.032  p=0.7956
+[2026-02-16 02:15:29] [INFO ]     TC -> AQ: diff=-0.026  p=0.8648
+[2026-02-16 02:15:29] [INFO ]     ETH -> AQ: diff=-0.131  p=0.3216
+[2026-02-16 02:15:29] [INFO ]   p-values adjusted (holm). Total tests: 10
+[2026-02-16 02:15:29] [GATE ] [GATE] MGA Permutation Test: PASS — 0 / 10 path-pair comparisons significant
+[2026-02-16 02:15:29] [INFO ]   Saved: tables/mga_results.csv
+[2026-02-16 02:15:29] [INFO ]   No significant MGA paths to plot.
+[2026-02-16 02:15:29] [INFO ] 
+[2026-02-16 02:15:29] [STEP ] >>> Step 4 — Reporting & Thesis-ready Text
+[2026-02-16 02:15:29] [INFO ] ------------------------------------------------------------
+[2026-02-16 02:15:30] [INFO ]   Saved: disclaimer.md
+[2026-02-16 02:15:30] [INFO ]   Saved: micom_summary.md
+[2026-02-16 02:15:30] [INFO ]   Saved: mga_summary.md
+[2026-02-16 02:15:30] [INFO ]   Saved: level_heterogeneity_summary.md
+[2026-02-16 02:15:30] [INFO ]   Saved: thesis_insert.md
+[2026-02-16 02:15:30] [INFO ] 
+[2026-02-16 02:15:30] [INFO ] ========================================================
+[2026-02-16 02:15:30] [INFO ] LEVEL-BASED HETEROGENEITY — PIPELINE SUMMARY
+[2026-02-16 02:15:30] [INFO ] ========================================================
+[2026-02-16 02:15:30] [INFO ] Backend:          seminr
+[2026-02-16 02:15:30] [INFO ] Clustering:       kmeans, k = 2
+[2026-02-16 02:15:30] [INFO ] Group sizes:      261 / 139
+[2026-02-16 02:15:30] [INFO ] MICOM Step 2:     FAIL/NOT ASSESSED
+[2026-02-16 02:15:30] [INFO ] MGA sig paths:    0 / 10
+[2026-02-16 02:15:30] [INFO ] Elapsed:          13.2 minutes
+[2026-02-16 02:15:30] [INFO ] Output:           09_robust/level_heterogeneity
+[2026-02-16 02:15:30] [INFO ] ========================================================
+[2026-02-16 02:15:30] [INFO ] 
+[2026-02-16 02:15:30] [INFO ] Elapsed: 13.2 minutes
+[2026-02-16 02:15:30] [INFO ] ========================================================
+[2026-02-16 02:15:30] [INFO ] Module finished.
+[2026-02-16 02:15:30] [INFO ] ========================================================

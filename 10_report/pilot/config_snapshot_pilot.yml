@@ -1,0 +1,78 @@
+# ==============================================================================
+# PILOT STAGE CONFIG — Type A Feasibility Pilot
+# ==============================================================================
+# Extends / overrides: 00_meta/analysis_config.yaml
+# Mục đích:  Pilot loại A (process / qualitative + feasibility).
+#   - Soi thảm hoạ (catastrophic item problems), KHÔNG để ra quyết định cắt gọt.
+#   - Kiểm tra quy trình vận hành: rải bảng hỏi, thu thập, data quality.
+#   - Nhìn sơ bộ loadings/VIF/reliability — cờ đỏ nếu < 0.30 hoặc VIF > 10.
+#   - KHÔNG dùng bootstrap/p-value để loại indicator.
+# ==============================================================================
+
+stage: "pilot"
+
+# --- Pilot subset (date-based → save IDs for main to exclude) ---
+# Time <= 2025-11-05 → ~34 quan sát đầu tiên.
+# Pipeline sẽ lưu pilot_ids.csv (cột Responder ID) để main exclude.
+date_filter:
+  column: "Time"
+  end: "2025-11-05"
+
+# Column chứa Responder ID (để lưu pilot_ids.csv)
+id_column: "Responder ID"
+
+# --- Dừng pipeline sau phase nào ---
+# Phase 1 = Data prep, Phase 2 = CMV + Measurement (CCA).
+# Pilot chỉ cần đến Phase 2 — KHÔNG chạy structural/hypotheses.
+stop_after_phase: 2
+
+# --- QC gate override ---
+# Pilot chỉ cần đủ N để soi lỗi vận hành (~30), không cần 10 * max_indicators.
+pilot_min_n: 30
+
+# --- Dữ liệu đầu vào ---
+data_input:
+  data_file: "data.xlsx"
+  data_sheet: "Data"
+  codebook_sheet: "Code_book"
+
+# --- Tham số ước lượng ---
+seed: 42
+bootstrap_samples: 0              # KHÔNG bootstrap — pilot feasibility only
+confidence_level: 0.95
+significance_level: 0.05
+
+# --- PLSpredict params ---
+plspredict:
+  k_folds: 10
+  repetitions: 10
+
+# --- Output ---
+output_dir: "10_report/pilot"
+log_prefix: "pilot"
+
+# --- Module flags ---
+# Pilot tập trung vào data quality + measurement (point estimates only)
+modules:
+  enable_cmv: true
+  enable_reflective: true
+  enable_formative: true
+  enable_hoc: true
+  enable_structural: false
+  enable_plspredict: false
+  enable_mediation: false
+  enable_moderation: false
+  enable_robustness: false
+  enable_report: false
+
+# --- Optimizer rules ---
+# Pilot KHÔNG auto-drop — chỉ quan sát, không cắt gọt.
+optimizer:
+  auto_drop_enabled: false
+  loading_drop_threshold: 0.40
+  max_iterations: 1
+
+# --- Instrument Lock ---
+# Pilot vẫn TẠO instrument_locked.json (snapshot current instrument, no removals).
+instrument_lock:
+  create_on_completion: true

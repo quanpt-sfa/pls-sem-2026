@@ -1,0 +1,4 @@
+"Moderator","Moderator_Level","W_Value","Simple_Slope"
+"TC","Low (M-1SD)",-1,0.341
+"TC","Medium (M)",0,0.393
+"TC","High (M+1SD)",1,0.444

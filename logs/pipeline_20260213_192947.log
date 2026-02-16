@@ -1,0 +1,64 @@
+[2026-02-13 19:29:47] [INFO] ========================================
+[2026-02-13 19:29:47] [INFO] CCA-SEM Pipeline — Log started
+[2026-02-13 19:29:47] [INFO] Time: 2026-02-13 19:29:47.131305
+[2026-02-13 19:29:47] [INFO] R version: R version 4.4.3 (2025-02-28 ucrt)
+[2026-02-13 19:29:47] [INFO] ========================================
+[2026-02-13 19:29:47] [INFO] Project: PLS-SEM Dissertation Analysis — Audit Quality (Khung CCA)
+[2026-02-13 19:29:47] [INFO] Config locked: 2026-02-13
+[2026-02-13 19:29:47] [INFO] Seed: 42
+[2026-02-13 19:29:47] [INFO] Bootstrap: 5000
+[2026-02-13 19:29:47] [INFO] Constructs: 11
+[2026-02-13 19:29:47] [INFO]   Reflective: 5
+[2026-02-13 19:29:47] [INFO]   Formative: 6
+[2026-02-13 19:29:47] [INFO] Structural paths: 10
+[2026-02-13 19:29:47] [INFO] 
+===== PHASE 1: DATA PREPARATION =====
+[2026-02-13 19:29:47] [INFO] 
+[2026-02-13 19:29:47] [INFO] >>> Step 1: Import & Technical Validation
+[2026-02-13 19:29:47] [INFO] --------------------------------------------------
+[2026-02-13 19:29:47] [INFO] Raw data: 466 rows x 68 cols
+[2026-02-13 19:29:47] [INFO] Raw snapshot saved: 01_raw/raw_data.rds
+[2026-02-13 19:29:47] [WARN] Flagged 33 potential duplicates (same response pattern)
+[2026-02-13 19:29:47] [INFO] After tech validation: 466 rows x 69 cols
+[2026-02-13 19:29:47] [GATE] ✅ GATE [ Tech Validation ]: PASS
+[2026-02-13 19:29:47] [GATE]   Details: All expected columns present
+[2026-02-13 19:29:47] [INFO] 
+[2026-02-13 19:29:47] [INFO] >>> Step 2: Behavioral Quality Control
+[2026-02-13 19:29:47] [INFO] --------------------------------------------------
+[2026-02-13 19:29:47] [INFO] Straight-lining flagged (Global SD=0): 34 (7.3%)
+[2026-02-13 19:29:47] [INFO] Longstring threshold (auto, P95): 60
+[2026-02-13 19:29:47] [INFO] Long-string flagged: 34 (7.3%)
+[2026-02-13 19:29:47] [WARN] Time values appear to be epoch timestamps (median=1763466280). Converting to durations from earliest response.
+[2026-02-13 19:29:47] [WARN] Epoch-derived durations are not true completion times — speeding check SKIPPED
+[2026-02-13 19:29:47] [INFO] Speeding flagged: 0 (skipped — no valid duration column)
+[2026-02-13 19:29:47] [INFO] Low IRV flagged: 34 (threshold: 0.000)
+[2026-02-13 19:29:47] [INFO] Total flagged for removal: 34 (7.3%)
+[2026-02-13 19:29:47] [INFO] Screening funnel plot saved
+[2026-02-13 19:29:47] [INFO] After QC screening: 432 rows (removed 34)
+[2026-02-13 19:29:47] [GATE] ✅ GATE [ Behavioral QC ]: PASS
+[2026-02-13 19:29:47] [GATE]   Details: N=432, minimum required=90
+[2026-02-13 19:29:47] [INFO] 
+[2026-02-13 19:29:47] [INFO] >>> Step 3: Missing Data Handling
+[2026-02-13 19:29:47] [INFO] --------------------------------------------------
+[2026-02-13 19:29:47] [INFO] Variable-level missing: min=0.0%, max=0.0%, median=0.0%
+[2026-02-13 19:29:47] [INFO] No observations exceed missing threshold
+[2026-02-13 19:29:47] [INFO] Imputed 0 values using 'mean' method
+[2026-02-13 19:29:47] [INFO] Assumption: MCAR
+[2026-02-13 19:29:47] [INFO] Final dataset: 432 rows x 60 indicator columns
+[2026-02-13 19:29:47] [GATE] ✅ GATE [ Missing Data ]: PASS
+[2026-02-13 19:29:47] [GATE]   Details: Remaining NA: 0, method: mean
+[2026-02-13 19:29:47] [INFO] 
+[2026-02-13 19:29:47] [INFO] >>> Step 4: Descriptive Statistics & Plausibility Checks
+[2026-02-13 19:29:47] [INFO] --------------------------------------------------
+[2026-02-13 19:29:47] [INFO] Descriptive stats: 60 variables computed
+[2026-02-13 19:29:47] [WARN] Extreme skewness (|>2|): COM1, COM9, PS2, PS3, PS4, PS5, ETH1, ETH2, ETH4
+[2026-02-13 19:29:47] [WARN] Extreme kurtosis (|>7|): COM1, PS3, ETH1, ETH2
+[2026-02-13 19:29:47] [INFO] Sample demographics: 3 variables summarized
+[2026-02-13 19:29:49] [INFO] Distribution plots saved: 04_descriptives/distribution_plots.pdf
+[2026-02-13 19:29:49] [GATE] ✅ GATE [ Descriptives ]: PASS
+[2026-02-13 19:29:49] [GATE]   Details: PASS with warnings — skew/kurtosis anomalies noted (acceptable for Likert data)
+[2026-02-13 19:29:49] [INFO] Descriptives complete — data cleared for modeling (distributional warnings noted)
+[2026-02-13 19:29:49] [INFO] 
+[2026-02-13 19:29:49] [INFO] >>> Step 4b: Control Variable Preparation
+[2026-02-13 19:29:49] [INFO] --------------------------------------------------
+[2026-02-13 19:29:49] [INFO] --- 4b.1. Demographic Profile (Table 1) ---

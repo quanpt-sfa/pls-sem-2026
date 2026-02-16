@@ -1,0 +1,3 @@
+NOTE: Cells involving formative constructs (COM, MO, CG, ETH, TC, AQ)
+are reported for information only and are NOT used for discriminant
+validity decisions. HTMT thresholds apply only to reflective-reflective pairs.
