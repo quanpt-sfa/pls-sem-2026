@@ -1,0 +1,5 @@
+"Stage","N","Removed","Pct_Removed","Note"
+"Tổng thu về (Raw responses)",466,NA,NA,"Từ file khảo sát gốc (gồm cả pilot + chính thức)"
+"Giai đoạn pilot (tách riêng)",34,NA,NA,"Đã dùng cho nghiên cứu sơ bộ, loại khỏi mẫu chính thức"
+"Mẫu chính thức (sau loại pilot)",432,NA,NA,"Mẫu chính thức đưa vào sàng lọc (N=432)"
+"Sau sàng lọc hành vi (QC)",400,32,7.4,"Loại 32 phiếu (>=2 cờ QC: straightline, longstring, speeding, low IRV)"

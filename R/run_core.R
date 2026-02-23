@@ -42,6 +42,7 @@ source_modules <- function() {
   source("R/13b_gaussian_copula.R")
   source("R/14_robust_nonlinear.R")
   source("R/14_report_export.R")
+  source("R/15_sensitivity_com6.R")
 }
 
 # ==============================================================================
@@ -640,7 +641,8 @@ run_stage <- function(stage_config_path) {
 
   # Step 2: Behavioral QC
   data_qc <- run_behavioral_qc(data_tech, cfg, log_info,
-                                pilot_min_n = stage_cfg$pilot_min_n)
+                                pilot_min_n = stage_cfg$pilot_min_n,
+                                stage = stage)
 
   # Step 3: Missing Data
   data_final <- handle_missing(data_qc, cfg, log_info)
@@ -1267,6 +1269,42 @@ run_stage <- function(stage_config_path) {
   }
 
   # ==========================================================================
+  # PHASE 5: COM6 INDICATOR SENSITIVITY (main only, if enabled)
+  # ==========================================================================
+  # Re-estimate PLS sans COM6, compare path coefficients / R² / f².
+  # Reuses data_final from Phase 1 — no re-import, no re-clean.
+  # Only costs one additional bootstrap run.
+  # ==========================================================================
+  com6_sens_result <- NULL
+  if (stage == "main" && isTRUE(modules$enable_com6_sensitivity)) {
+    tryCatch({
+      sens_cfg <- stage_cfg$com6_sensitivity
+      if (is.null(sens_cfg)) {
+        sens_cfg <- list(construct = "COM", indicator = "COM6",
+                         bootstrap_samples = cfg$project$bootstrap_samples,
+                         output_subdir = "09_robust/com6_sensitivity")
+      }
+      if (is.null(sens_cfg$bootstrap_samples))
+        sens_cfg$bootstrap_samples <- cfg$project$bootstrap_samples
+      if (is.null(sens_cfg$seed))
+        sens_cfg$seed <- cfg$project$seed
+
+      com6_sens_result <- run_com6_sensitivity(
+        pls_baseline      = pls_model,
+        boot_baseline     = boot_model,
+        data_final        = data_final,
+        active_indicators = active_indicators,
+        cfg               = cfg,
+        log_info          = log_info,
+        policy            = inference_policy,
+        sensitivity_cfg   = sens_cfg
+      )
+    }, error = function(e) {
+      log_warn(log_info, paste("COM6 sensitivity error:", e$message))
+    })
+  }
+
+  # ==========================================================================
   # INSTRUMENT LOCK — Write (pilot only)
   # ==========================================================================
   if (stage == "pilot" && isTRUE(stage_cfg$instrument_lock$create_on_completion)) {
@@ -1326,6 +1364,14 @@ run_stage <- function(stage_config_path) {
   log_msg(log_info, sprintf("Instrument locked: %s",
                              ifelse(instrument_locked, "YES (from pilot)",
                                     ifelse(stage == "pilot", "CREATED", "NO"))))
+  if (!is.null(com6_sens_result)) {
+    log_msg(log_info, sprintf("COM6 Sensitivity: %s (flips=%s, max|Delta_Beta|=%s)",
+                               ifelse(isTRUE(com6_sens_result$robust), "ROBUST", "SENSITIVE"),
+                               ifelse(is.na(com6_sens_result$n_flips), "N/A",
+                                      as.character(com6_sens_result$n_flips)),
+                               ifelse(is.na(com6_sens_result$max_delta_beta), "N/A",
+                                      sprintf("%.4f", com6_sens_result$max_delta_beta))))
+  }
   log_msg(log_info, "========================================")
 
   close_pipeline_log(log_info)

@@ -7,8 +7,8 @@ score-based clustering on exogenous construct scores (Hair et al., 2022).
 ## Step 1: Clustering
 - Method: kmeans
 - Optimal k: 2
-- Mean silhouette: 0.297
-- Group sizes: 261 / 139
+- Mean silhouette: 0.296
+- Group sizes: 260 / 140
 - Exogenous constructs used: COM, PS, MO, TP, IT, CEV, CG, TC, ETH
 
 ## Step 2: MICOM
@@ -26,4 +26,4 @@ heterogeneity. No significant path coefficient differences were found
 between subgroups defined by exogenous construct score profiles.
 
 ---
-Seed: 18 | Generated: 2026-02-16 03:20:40
+Seed: 18 | Generated: 2026-02-19 00:56:11

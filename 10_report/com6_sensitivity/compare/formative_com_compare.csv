@@ -1,0 +1,9 @@
+"Indicator","Decision_Baseline","Reason_Baseline","Weight_Baseline","Loading_Baseline","Decision_NoCOM6","Reason_NoCOM6","Weight_NoCOM6","Loading_NoCOM6","Decision_Changed"
+"COM1","KEEP","Weight significant (CI[0.037,0.418] excl. 0, t=2.483, p=0.0204)",0.239,0.863,"KEEP","Weight significant (CI[0.037,0.418] excl. 0, t=2.483, p=0.0204)",0.239,0.863,FALSE
+"COM2","KEEP (content)","Weight ns (CI includes 0, t=-0.171, p=0.9352) but loading=0.796 >= 0.50; content important",-0.017,0.796,"KEEP (content)","Weight ns (CI includes 0, t=-0.171, p=0.9352) but loading=0.796 >= 0.50; content important",-0.017,0.796,FALSE
+"COM3","KEEP","Weight significant (CI[0.020,0.402] excl. 0, t=2.357, p=0.0308)",0.226,0.856,"KEEP","Weight significant (CI[0.020,0.402] excl. 0, t=2.357, p=0.0308)",0.226,0.856,FALSE
+"COM4","KEEP (content)","Weight ns (CI includes 0, t=1.747, p=0.0868) but loading=0.726 >= 0.50; content important",0.123,0.726,"KEEP (content)","Weight ns (CI includes 0, t=1.747, p=0.0868) but loading=0.726 >= 0.50; content important",0.123,0.726,FALSE
+"COM5","KEEP (content)","Weight ns (CI includes 0, t=0.424, p=0.6552) but loading=0.763 >= 0.50; content important",0.041,0.763,"KEEP (content)","Weight ns (CI includes 0, t=0.424, p=0.6552) but loading=0.763 >= 0.50; content important",0.041,0.763,FALSE
+"COM7","KEEP (content)","Weight ns (CI includes 0, t=1.933, p=0.0524) but loading=0.643 >= 0.50; content important",0.131,0.643,"KEEP (content)","Weight ns (CI includes 0, t=1.933, p=0.0524) but loading=0.643 >= 0.50; content important",0.131,0.643,FALSE
+"COM8","KEEP","Weight significant (CI[0.030,0.406] excl. 0, t=2.187, p=0.0232)",0.211,0.854,"KEEP","Weight significant (CI[0.030,0.406] excl. 0, t=2.187, p=0.0232)",0.211,0.854,FALSE
+"COM9","KEEP","Weight significant (CI[0.105,0.432] excl. 0, t=3.230, p=<0.001)",0.268,0.853,"KEEP","Weight significant (CI[0.105,0.432] excl. 0, t=3.230, p=<0.001)",0.268,0.853,FALSE

@@ -50,6 +50,74 @@ run_descriptives <- function(data, cfg, log_info, stage = "main") {
   write.csv(desc_stats, "04_descriptives/descriptive_stats.csv", row.names = FALSE)
   log_msg(log_info, sprintf("Descriptive stats: %d variables computed", nrow(desc_stats)))
 
+  # ============================================================================
+  # 4.1b. Construct-Level Descriptive Statistics
+  # Mean / SD tính bằng trung bình hàng (row-mean) các indicators trong mỗi construct,
+  # sau đó tổng hợp N, Mean, SD, Min, Max, Skewness, Kurtosis trên vector composite đó.
+  # ============================================================================
+  construct_rows <- list()
+  for (cc in cfg$constructs) {
+    block_cols <- intersect(cc$indicators, ind_cols)
+    if (length(block_cols) < 1) next
+
+    # Row-mean composite score per respondent
+    comp_score <- rowMeans(data[, block_cols, drop = FALSE], na.rm = TRUE)
+    n_valid    <- sum(!is.na(comp_score))
+
+    if (n_valid < 3) {
+      # Too few observations for meaningful stats
+      construct_rows[[cc$name]] <- data.frame(
+        Construct        = cc$name,
+        Full_Name        = cc$full_name,
+        Measurement_Type = cc$measurement_type,
+        N_Indicators     = length(block_cols),
+        N                = n_valid,
+        Mean = NA, SD = NA, Min = NA, Max = NA, Skewness = NA, Kurtosis = NA,
+        stringsAsFactors = FALSE
+      )
+      next
+    }
+
+    x   <- comp_score[!is.na(comp_score)]
+    n_x <- length(x)
+    m   <- mean(x)
+    s   <- sd(x)
+    skw <- if (n_x > 2) (n_x / ((n_x - 1) * (n_x - 2))) * sum(((x - m) / s)^3) else NA
+    krt <- if (n_x > 3) mean((x - m)^4) / s^4 - 3 else NA
+
+    construct_rows[[cc$name]] <- data.frame(
+      Construct        = cc$name,
+      Full_Name        = cc$full_name,
+      Measurement_Type = cc$measurement_type,
+      N_Indicators     = length(block_cols),
+      N                = n_valid,
+      Mean     = round(m, 3),
+      SD       = round(s, 3),
+      Min      = round(min(x), 3),
+      Max      = round(max(x), 3),
+      Skewness = round(skw, 3),
+      Kurtosis = round(krt, 3),
+      stringsAsFactors = FALSE
+    )
+  }
+
+  if (length(construct_rows) > 0) {
+    construct_stats <- do.call(rbind, construct_rows)
+    row.names(construct_stats) <- NULL
+    write.csv(construct_stats, "04_descriptives/construct_descriptive_stats.csv",
+              row.names = FALSE)
+    log_msg(log_info, sprintf("Construct-level descriptive stats: %d constructs saved to 04_descriptives/construct_descriptive_stats.csv",
+                               nrow(construct_stats)))
+    for (i in seq_len(nrow(construct_stats))) {
+      log_msg(log_info, sprintf("  %s (%s): M=%.3f, SD=%.3f [%d items]",
+                                 construct_stats$Construct[i],
+                                 construct_stats$Measurement_Type[i],
+                                 construct_stats$Mean[i],
+                                 construct_stats$SD[i],
+                                 construct_stats$N_Indicators[i]))
+    }
+  }
+
   # Cảnh báo skewness/kurtosis cực
   extreme_skew <- desc_stats$Variable[abs(desc_stats$Skewness) > 2]
   extreme_kurt <- desc_stats$Variable[abs(desc_stats$Kurtosis) > 7]
@@ -158,15 +226,73 @@ run_descriptives <- function(data, cfg, log_info, stage = "main") {
                                nrow(demo_rows[["pos"]]), sum(demo_rows[["pos"]]$N)))
   }
 
+  # Helper: write CSV with UTF-8 BOM (Excel-friendly Vietnamese)
+  write_csv_utf8bom <- function(df, path) {
+    con <- file(path, open = "wb")
+    writeBin(charToRaw("\xEF\xBB\xBF"), con)   # UTF-8 BOM
+    writeLines(capture.output(write.csv(df, row.names = FALSE, file = "")),
+               con, useBytes = TRUE)
+    close(con)
+  }
+
   if (length(demo_rows) > 0) {
+    # --- Combined table (backward compat) ---
     demo_profile <- do.call(rbind, demo_rows)
     row.names(demo_profile) <- NULL
-    write.csv(demo_profile, "04_descriptives/demographic_profile.csv", row.names = FALSE)
-    log_msg(log_info, sprintf("  Saved: 04_descriptives/demographic_profile.csv (%d rows)",
+    write_csv_utf8bom(demo_profile, "04_descriptives/demographic_profile.csv")
+    log_msg(log_info, sprintf("  Saved: 04_descriptives/demographic_profile.csv (%d rows, UTF-8 BOM)",
                                nrow(demo_profile)))
-    # Also save as sample_demographics for backward compatibility
-    write.csv(demo_profile, "04_descriptives/sample_demographics.csv", row.names = FALSE)
-    log_msg(log_info, sprintf("Sample demographics: %d variables summarized", length(demo_rows)))
+
+    # --- Separate tables per variable, each with Tổng cộng row ---
+    dir.create("04_descriptives/demographics", showWarnings = FALSE, recursive = TRUE)
+
+    # Map internal key -> safe filename
+    demo_file_map <- list(
+      gen  = "gioi_tinh",
+      edu  = "bang_cap",
+      cert = "chung_chi_hanh_nghe",
+      exp  = "kinh_nghiem",
+      pos  = "vi_tri"
+    )
+
+    for (key in names(demo_rows)) {
+      tbl <- demo_rows[[key]]
+      # Append Tổng cộng row
+      total_row <- data.frame(
+        Variable = tbl$Variable[1],
+        Category = "Tổng cộng",
+        N        = sum(tbl$N),
+        Pct      = round(sum(tbl$Pct), 1),
+        stringsAsFactors = FALSE
+      )
+      tbl_with_total <- rbind(tbl, total_row)
+      row.names(tbl_with_total) <- NULL
+
+      fname <- paste0("04_descriptives/demographics/",
+                       ifelse(key %in% names(demo_file_map),
+                              demo_file_map[[key]], key),
+                       ".csv")
+      write_csv_utf8bom(tbl_with_total, fname)
+      log_msg(log_info, sprintf("    %s: %s (%d categories + total)",
+                                 tbl$Variable[1], fname, nrow(tbl)))
+    }
+
+    # Also build combined version with totals per variable
+    combined_with_totals <- do.call(rbind, lapply(names(demo_rows), function(key) {
+      tbl <- demo_rows[[key]]
+      total_row <- data.frame(
+        Variable = tbl$Variable[1],
+        Category = "Tổng cộng",
+        N        = sum(tbl$N),
+        Pct      = round(sum(tbl$Pct), 1),
+        stringsAsFactors = FALSE
+      )
+      rbind(tbl, total_row)
+    }))
+    row.names(combined_with_totals) <- NULL
+    write_csv_utf8bom(combined_with_totals, "04_descriptives/sample_demographics.csv")
+    log_msg(log_info, sprintf("Sample demographics: %d variables, saved with totals (UTF-8 BOM)",
+                               length(demo_rows)))
   } else {
     log_warn(log_info, "  No demographic variables available for Table 1")
   }

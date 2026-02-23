@@ -1,4 +1,4 @@
 "Equation","Suspected","Decision","Reason"
-"AJ","COM","NO_ENDOGENEITY","gamma CI [-0.1213, 0.1539] includes 0"
+"AJ","COM","NO_ENDOGENEITY","gamma CI [-0.1702, 0.1634] includes 0"
 "AJ","PS","INCONCLUSIVE","VIF(COP_PS)=6.7 > 5; copula too collinear with X"
 "AQ","AJ","SKIPPED","cor(X, COP_X)=0.9599 > 0.95 — near-linear transform"

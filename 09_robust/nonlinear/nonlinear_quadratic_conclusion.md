@@ -1,5 +1,5 @@
 # Nonlinear Robustness Check — Conclusion
-Date: 2026-02-16 03:07:43.908888
+Date: 2026-02-19 00:41:15.708599
 Seed: 18, Bootstrap: 5000, CI: percentile 95%
 Center method: mean_center
 
@@ -8,10 +8,10 @@ Relations tested: 3
 Significant quadratic effects: 1
 
 ### Competence → Audit Judgment
-- beta_linear (base):       0.202
-- beta_linear (quad model): 0.222, CI[0.081, 0.368]*
-- beta_quadratic:           0.010, CI[-0.024, 0.041]
-- delta R²: +0.0005
+- beta_linear (base):       0.195
+- beta_linear (quad model): 0.214, CI[0.069, 0.363]*
+- beta_quadratic:           0.009, CI[-0.025, 0.040]
+- delta R²: +0.0004
 - Conclusion: Linear conclusion robust — no significant quadratic effect
 
 ### Audit Judgment → Audit Quality

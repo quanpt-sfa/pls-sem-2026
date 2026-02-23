@@ -30,4 +30,4 @@ using score-based clustering on **exogenous** construct scores only.
 Configuration: seed=18, clustering=kmeans, k=2/3/4/5, MICOM permutations=5000, MGA permutations=5000
 
 ---
-Generated: 2026-02-16 03:20:40
+Generated: 2026-02-19 00:56:11

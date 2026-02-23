@@ -35,8 +35,9 @@ calc_straightline_ratio <- function(row_data) {
 #' @param cfg list config
 #' @param log_info list log
 #' @param pilot_min_n optional integer — override min_sample for pilot (NULL = use 10*max formula)
+#' @param stage "pilot" or "main" — affects sample flow table labels
 #' @return data.frame đã sàng lọc
-run_behavioral_qc <- function(data, cfg, log_info, pilot_min_n = NULL) {
+run_behavioral_qc <- function(data, cfg, log_info, pilot_min_n = NULL, stage = "main") {
   
   log_step(log_info, "Step 2: Behavioral Quality Control")
   
@@ -179,24 +180,88 @@ run_behavioral_qc <- function(data, cfg, log_info, pilot_min_n = NULL) {
   )
   write.csv(summary_df, "03_qc/qc_summary.csv", row.names = FALSE)
   
-  # Phễu sàng lọc
+  # Phễu sàng lọc + Bảng dòng chảy mẫu
+  n_raw <- tryCatch(nrow(readRDS("01_raw/raw_data.rds")), error = function(e) NA)
+  n_after_qc <- n_original - n_remove
+
+  # --- 2.7a. Screening Funnel Plot ---
   tryCatch({
     library(ggplot2)
+    if (stage == "pilot") {
+      funnel_labels <- c("Thu về (Raw)", "Pilot (date filter)", "Sau sàng lọc")
+      funnel_n      <- c(ifelse(is.na(n_raw), n_original, n_raw), n_original, n_after_qc)
+      funnel_fill   <- c("#4e79a7", "#59a14f", "#e15759")
+    } else {
+      n_pilot_excluded <- ifelse(is.na(n_raw), NA, n_raw - n_original)
+      funnel_labels <- c("Thu về (Raw)", "Pilot (tách riêng)",
+                         "Mẫu chính thức", "Sau sàng lọc hành vi")
+      funnel_n      <- c(ifelse(is.na(n_raw), NA, n_raw),
+                         ifelse(is.na(n_pilot_excluded), NA, n_pilot_excluded),
+                         n_original, n_after_qc)
+      funnel_fill   <- c("#4e79a7", "#f28e2b", "#59a14f", "#e15759")
+    }
     funnel_data <- data.frame(
-      Stage = factor(c("Raw", "After Tech QC", "After Behavioral QC"),
-                     levels = c("Raw", "After Tech QC", "After Behavioral QC")),
-      N = c(nrow(readRDS("01_raw/raw_data.rds")), n_original, n_original - n_remove)
+      Stage = factor(funnel_labels, levels = funnel_labels),
+      N = funnel_n
     )
+    funnel_data <- funnel_data[!is.na(funnel_data$N), ]
     p <- ggplot(funnel_data, aes(x = Stage, y = N)) +
-      geom_col(fill = c("#4e79a7", "#59a14f", "#e15759"), width = 0.6) +
+      geom_col(fill = funnel_fill[seq_len(nrow(funnel_data))], width = 0.6) +
       geom_text(aes(label = N), vjust = -0.5, size = 5) +
       labs(title = "Screening Funnel", y = "N observations", x = "") +
       theme_minimal(base_size = 14)
-    ggsave("03_qc/screening_funnel.png", p, width = 8, height = 5, dpi = 150)
+    ggsave("03_qc/screening_funnel.png", p, width = 9, height = 5, dpi = 150)
     log_msg(log_info, "Screening funnel plot saved")
   }, error = function(e) {
     log_warn(log_info, paste("Could not create funnel plot:", e$message))
   })
+
+  # --- 2.7b. Sample Flow Table (Bảng dòng chảy mẫu) ---
+  # Dùng cho mục 4.3 luận án — trình bày trước kết quả sàng lọc
+  if (stage == "pilot") {
+    sample_flow <- data.frame(
+      Stage       = c("Thu về (Raw responses)",
+                      "Mẫu pilot (date filter)",
+                      "Sau sàng lọc hành vi"),
+      N           = c(ifelse(is.na(n_raw), NA, n_raw), n_original, n_after_qc),
+      Removed     = c(NA,
+                      ifelse(is.na(n_raw), NA, n_raw - n_original),
+                      n_remove),
+      Pct_Removed = c(NA,
+                      ifelse(is.na(n_raw), NA,
+                             round(100 * (n_raw - n_original) / n_raw, 1)),
+                      round(100 * n_remove / n_original, 1)),
+      Note        = c("Từ file khảo sát gốc",
+                      "Lọc theo ngày pilot",
+                      sprintf("Loại %d (>=%d cờ QC)", n_remove, threshold)),
+      stringsAsFactors = FALSE
+    )
+  } else {
+    n_pilot_excluded <- ifelse(is.na(n_raw), NA, n_raw - n_original)
+    sample_flow <- data.frame(
+      Stage       = c("Tổng thu về (Raw responses)",
+                      "Giai đoạn pilot (tách riêng)",
+                      "Mẫu chính thức (sau loại pilot)",
+                      "Sau sàng lọc hành vi (QC)"),
+      N           = c(ifelse(is.na(n_raw), NA, n_raw),
+                      ifelse(is.na(n_pilot_excluded), NA, n_pilot_excluded),
+                      n_original,
+                      n_after_qc),
+      Removed     = c(NA, NA, NA, n_remove),
+      Pct_Removed = c(NA, NA, NA,
+                      round(100 * n_remove / n_original, 1)),
+      Note        = c("Từ file khảo sát gốc (gồm cả pilot + chính thức)",
+                      "Đã dùng cho nghiên cứu sơ bộ, loại khỏi mẫu chính thức",
+                      sprintf("Mẫu chính thức đưa vào sàng lọc (N=%d)", n_original),
+                      sprintf("Loại %d phiếu (>=%d cờ QC: straightline, longstring, speeding, low IRV)",
+                              n_remove, threshold)),
+      stringsAsFactors = FALSE
+    )
+  }
+  write.csv(sample_flow, "03_qc/sample_flow.csv", row.names = FALSE)
+  log_msg(log_info, sprintf("Sample flow table saved: 03_qc/sample_flow.csv (%s)",
+                             paste(sprintf("%s=%s", sample_flow$Stage,
+                                           sample_flow$N), collapse = " -> ")))
   
   # Lưu 2 phiên bản
   saveRDS(data, "02_clean/clean_qc_flagged.rds")  # Có cờ, chưa loại

@@ -1,0 +1,99 @@
+# ==============================================================================
+# Inference Policy — Centralized Statistical Decision Rules
+# ==============================================================================
+# This file defines the SINGLE source of truth for how significance is
+# determined across the entire CCA-SEM / PLS-SEM pipeline.
+# All modules (structural, measurement, mediation, moderation, export)
+# MUST use these rules via utils_inference.R helpers.
+#
+# Rationale:
+#   - Bootstrap CI (percentile) is the primary decision criterion.
+#   - t-stat and p-value are reported for transparency but do NOT override CI.
+#   - This avoids the "CI vs t mismatch" inconsistency in thesis tables.
+#
+# References:
+#   Hair et al. (2022). A Primer on PLS-SEM (3rd ed.)
+#   Henseler et al. (2015). Journal of the Academy of Marketing Science.
+#   Kock (2015). International Journal of e-Collaboration.
+#   Nitzl et al. (2016). Industrial Management & Data Systems.
+#   Zhao et al. (2010). Journal of the Academy of Marketing Science.
+#   Cohen (1988). Statistical Power Analysis for the Behavioral Sciences.
+#   Shmueli et al. (2019). Journal of Business Research.
+# ==============================================================================
+
+# --- Primary significance rule ---
+primary_rule: "ci_excludes_zero"      # Options: ci_excludes_zero | p_value
+alpha: 0.05
+ci_method: "percentile"               # percentile | BCa (future)
+ci_level: 0.95
+two_tailed: true
+
+# --- Decimal formatting ---
+decimals:
+  estimate: 3        # beta, weight, loading, indirect, f²
+  t_stat: 3
+  p_value: 4         # or "<0.001" when below
+  ci: 3
+  vif: 3
+  r_squared: 3
+  vaf: 3             # VAF = indirect/total (descriptive)
+
+# --- Reflective measurement thresholds ---
+reflective:
+  loading_keep: 0.708
+  loading_review_low: 0.40
+  loading_auto_drop: 0.40
+  reliability_min: 0.70
+  reliability_max: 0.95
+  ave_min: 0.50
+  htmt_strict: 0.85
+  htmt_lenient: 0.90
+
+# --- Formative measurement thresholds ---
+formative:
+  outer_vif_ok: 3.0
+  outer_vif_caution: 5.0
+  loading_keep_for_content: 0.50
+
+# --- CMV thresholds (Kock, 2015) ---
+cmv:
+  full_collinearity_vif_warn: 3.3
+  full_collinearity_vif_fail: 5.0
+
+# --- Structural model thresholds ---
+structural:
+  inner_vif_max: 5.0
+  f_squared_small: 0.02
+  f_squared_medium: 0.15
+  f_squared_large: 0.35
+  r_squared_weak: 0.02
+  r_squared_moderate: 0.13
+  r_squared_substantial: 0.26
+
+# --- PLSpredict classification ---
+plspredict:
+  q2_predict_threshold: 0.0
+  # Classification rule:
+  #   HIGH = PLS < LM for all RMSE & MAE indicators + Q²_predict > 0 for all
+  #   MEDIUM = PLS < LM for majority of RMSE indicators + Q²_predict > 0 for majority
+  #   LOW = PLS < LM for minority of RMSE indicators
+  #   NONE = PLS >= LM for all RMSE indicators
+
+# --- Table note templates ---
+table_notes:
+  inference_base: >
+    N = %d; Bootstrap B = %d (seed = %d); CI method: %s %s%% two-tailed.
+    Primary inference rule: %s%% bootstrap CI excludes 0.
+    * significant at alpha = %s.
+  mismatch_note: >
+    When CI and t-stat/p-value disagree (mismatch), the CI-based decision
+    takes precedence. Mismatch is flagged for transparency.
+  mediation_note: >
+    Indirect effect = a_boot[i] * b_boot[i] (aligned bootstrap draws).
+    Classification per Nitzl et al. (2016) / Zhao et al. (2010).
+    VAF = indirect/total (descriptive only, not used for classification).
+  moderation_note: >
+    Two-stage approach (Hair et al., 2022).
+    Primary inference: %s%% bootstrap CI excludes 0.
+    Simple slopes illustrate the conditional effect at Low (M-1SD),
+    Medium (M), and High (M+1SD) levels of the moderator.

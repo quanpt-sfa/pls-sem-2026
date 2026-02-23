@@ -79,6 +79,17 @@ suppressPackageStartupMessages({
   x - mean(x, na.rm = TRUE)
 }
 
+#' Classify f² effect size per Cohen (1988)
+#' @param f2 numeric f² value
+#' @return character classification
+.nl_classify_f2 <- function(f2) {
+  if (is.na(f2) || !is.finite(f2) || f2 < 0) return("N/A")
+  if (f2 >= 0.35) return("Large")
+  if (f2 >= 0.15) return("Medium")
+  if (f2 >= 0.02) return("Small")
+  "Negligible"
+}
+
 # ==============================================================================
 # CORE: BOOTSTRAP STAGE-2 REGRESSION
 # ==============================================================================
@@ -419,6 +430,14 @@ run_robust_nonlinear <- function(config_path = "config/robustness_nonlinear.yml"
       delta_beta <- beta_lin_quad - beta_lin_base
       delta_r2   <- r2_quad - r2_lin
 
+      # f² effect size for the quadratic term (Hair et al., 2021; Haans et al., 2016)
+      # f² = (R²_full - R²_reduced) / (1 - R²_full)
+      # where full = linear + X², reduced = linear-only
+      f2_quad <- ifelse(r2_quad < 1,
+                        delta_r2 / (1 - r2_quad),
+                        NA_real_)
+      f2_class <- .nl_classify_f2(f2_quad)
+
       # VIF of quadratic term
       vif_quad <- NA_real_
       tryCatch({
@@ -466,6 +485,8 @@ run_robust_nonlinear <- function(config_path = "config/robustness_nonlinear.yml"
                                   x2_col, ifelse(is.na(vif_quad), 0, vif_quad)))
       .nl_log(log_info, sprintf("  R²(linear): %.3f, R²(quadratic): %.3f, deltaR²: %+.4f",
                                   r2_lin, r2_quad, delta_r2))
+      .nl_log(log_info, sprintf("  f²(quadratic): %.4f [%s]  (Cohen 1988: >=.02 Small, >=.15 Medium, >=.35 Large)",
+                                  ifelse(is.na(f2_quad), 0, f2_quad), f2_class))
       .nl_log(log_info, sprintf("  delta(beta_linear): %+.4f (quad model vs linear-only)",
                                   delta_beta))
       .nl_log(log_info, sprintf("  => %s", note))
@@ -491,6 +512,8 @@ run_robust_nonlinear <- function(config_path = "config/robustness_nonlinear.yml"
         R2_Linear            = round(r2_lin, 3),
         R2_Quadratic         = round(r2_quad, 3),
         Delta_R2             = round(delta_r2, 4),
+        f2_Quadratic         = round(f2_quad, 4),
+        f2_Classification    = f2_class,
         R2_Base_PLS          = round(ifelse(y_name %in% names(base_r2),
                                              base_r2[[y_name]], NA_real_), 3),
         Note                 = note,
@@ -553,7 +576,8 @@ run_robust_nonlinear <- function(config_path = "config/robustness_nonlinear.yml"
         Beta_Quadratic = NA, CI_Quad_Lo = NA, CI_Quad_Hi = NA,
         Sig_Quadratic = NA, P_Quadratic = NA, VIF_Quadratic = NA,
         Delta_Beta_Linear = NA, R2_Linear = NA, R2_Quadratic = NA,
-        Delta_R2 = NA, R2_Base_PLS = NA,
+        Delta_R2 = NA, f2_Quadratic = NA, f2_Classification = NA,
+        R2_Base_PLS = NA,
         Note = paste("ERROR:", e$message),
         stringsAsFactors = FALSE
       )
@@ -602,6 +626,9 @@ run_robust_nonlinear <- function(config_path = "config/robustness_nonlinear.yml"
                r$Beta_Quadratic, r$CI_Quad_Lo, r$CI_Quad_Hi,
                ifelse(isTRUE(r$Sig_Quadratic), "*", "")),
       sprintf("- delta R²: %+.4f", r$Delta_R2),
+      sprintf("- f²(quadratic): %.4f [%s]",
+               ifelse(is.na(r$f2_Quadratic), 0, r$f2_Quadratic),
+               ifelse(is.na(r$f2_Classification), "N/A", r$f2_Classification)),
       sprintf("- Conclusion: %s", r$Note),
       ""
     )
@@ -636,9 +663,11 @@ run_robust_nonlinear <- function(config_path = "config/robustness_nonlinear.yml"
   for (i in seq_len(nrow(results_df))) {
     r <- results_df[i, ]
     sig_str <- ifelse(isTRUE(r$Sig_Quadratic), "NONLINEAR", "linear robust")
-    .nl_log(log_info, sprintf("    %s: beta_quad=%.3f, p=%s [%s]",
+    .nl_log(log_info, sprintf("    %s: beta_quad=%.3f, f2=%.4f [%s], p=%s [%s]",
                                 r$Relation,
                                 ifelse(is.na(r$Beta_Quadratic), 0, r$Beta_Quadratic),
+                                ifelse(is.na(r$f2_Quadratic), 0, r$f2_Quadratic),
+                                ifelse(is.na(r$f2_Classification), "N/A", r$f2_Classification),
                                 fmt_p(r$P_Quadratic),
                                 sig_str))
   }
@@ -651,11 +680,30 @@ run_robust_nonlinear <- function(config_path = "config/robustness_nonlinear.yml"
   }
   .nl_log(log_info, sprintf("  Time: %.1f minutes", elapsed))
 
+  # --------------------------------------------------------------------------
+  # 8. Export f² effect size table (standalone CSV for thesis Table X)
+  # --------------------------------------------------------------------------
+  f2_df <- results_df[, c("Relation", "X", "Y",
+                           "Beta_Quadratic", "CI_Quad_Lo", "CI_Quad_Hi",
+                           "Sig_Quadratic", "P_Quadratic",
+                           "R2_Linear", "R2_Quadratic", "Delta_R2",
+                           "f2_Quadratic", "f2_Classification"), drop = FALSE]
+  names(f2_df) <- c("Relation", "X", "Y",
+                     "Beta_X2", "CI_Lo", "CI_Hi",
+                     "Significant", "p_value",
+                     "R2_without_X2", "R2_with_X2", "Delta_R2",
+                     "f2", "Effect_Size")
+  f2_csv_path <- file.path(output_dir, "f2_quadratic_effects.csv")
+  write.csv(f2_df, f2_csv_path, row.names = FALSE)
+  .nl_log(log_info, sprintf("f² quadratic effects exported: %s", f2_csv_path))
+
   invisible(list(
-    results  = results_df,
-    config   = nl_cfg,
-    elapsed  = elapsed,
-    csv_path = csv_path,
-    md_path  = md_path
+    results      = results_df,
+    f2_table     = f2_df,
+    config       = nl_cfg,
+    elapsed      = elapsed,
+    csv_path     = csv_path,
+    f2_csv_path  = f2_csv_path,
+    md_path      = md_path
   ))
 }

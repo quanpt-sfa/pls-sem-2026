@@ -1,0 +1,77 @@
+# ==============================================================================
+# MAIN STUDY CONFIG (SENSITIVITY) — Exclude COM6
+# ==============================================================================
+# Mục đích: chạy mô hình sensitivity với cùng thiết lập main,
+# chỉ bổ sung freeze rule drop COM6 để so sánh với baseline.
+# ==============================================================================
+
+stage: "main"
+
+# --- Pilot exclusion (ID-based) ---
+exclude_pilot_ids: "10_report/pilot/pilot_ids.csv"
+id_column: "Responder ID"
+
+# --- Dữ liệu đầu vào ---
+data_input:
+  data_file: "data.xlsx"
+  data_sheet: "Data"
+  codebook_sheet: "Code_book"
+
+# --- Tham số ước lượng ---
+seed: 18
+bootstrap_samples: 5000
+confidence_level: 0.95
+significance_level: 0.05
+
+# --- PLSpredict params ---
+plspredict:
+  k_folds: 10
+  repetitions: 10
+
+# --- Output ---
+output_dir: "10_report/main_no_com6"
+log_prefix: "main_no_com6"
+
+# --- Module flags ---
+modules:
+  enable_cmv: true
+  enable_reflective: true
+  enable_formative: true
+  enable_hoc: true
+  enable_structural: true
+  enable_plspredict: true
+  enable_mediation: true
+  enable_moderation: true
+  enable_robustness: true
+  enable_nonlinear: true
+  enable_level_heterogeneity: true
+  enable_report: true
+
+# --- Optimizer rules ---
+optimizer:
+  auto_drop_enabled: false
+  loading_drop_threshold: 0.40
+  max_iterations: 3
+
+# --- Endogeneity (Gaussian Copula) ---
+endogeneity:
+  suspected: ["COM", "PS", "AJ"]
+  cor_threshold: 0.95
+  force_normal: false
+
+# --- Freeze rules ---
+freeze_rules:
+  - construct: "TP"
+    indicator: "TP3"
+    action: "drop"
+    reason: "Loading=0.379 < 0.40 in both pilot and main; pre-registered drop rule"
+  - construct: "COM"
+    indicator: "COM6"
+    action: "drop"
+    reason: "Sensitivity run: exclude COM6 and compare with baseline main model"
+
+# --- Instrument Lock ---
+instrument_lock:
+  create_on_completion: false
+  require_from_pilot: true
+  pilot_lock_path: "10_report/pilot/instrument_locked.json"

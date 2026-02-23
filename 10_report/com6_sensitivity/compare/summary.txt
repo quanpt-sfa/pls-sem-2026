@@ -1,0 +1,10 @@
+COM6 Sensitivity Comparison Summary
+Generated: 2026-02-18 22:00:34.783882
+
+Path table rows: 10
+Significance flips: 0
+R2 table rows: 2
+Prediction table rows: 4
+Main-state restored: PENDING (on.exit)
+
+Output folder: D:/Works/Data analysis/C4/10_report/com6_sensitivity/compare

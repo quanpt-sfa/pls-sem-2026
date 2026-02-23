@@ -1,6 +1,6 @@
 # Gaussian Copula Endogeneity Test — Results
 
-Date: 2026-02-16 03:07:12.566598
+Date: 2026-02-19 00:40:38.07454
 N = 400, B = 5000, seed = 18
 Primary rule: 95% bootstrap percentile CI excludes 0 (Park & Gupta, 2012)
 Strategy: one-at-a-time (one COP_X per augmented model)
@@ -18,7 +18,7 @@ Strategy: one-at-a-time (one COP_X per augmented model)
 
 ## Decisions per tested variable
 
-- **COM -> AJ**: NO_ENDOGENEITY (gamma CI [-0.1213, 0.1539] includes 0)
+- **COM -> AJ**: NO_ENDOGENEITY (gamma CI [-0.1702, 0.1634] includes 0)
 - **PS -> AJ**: INCONCLUSIVE (VIF(COP_PS)=6.7 > 5; copula too collinear with X)
 
 ## Interpretation

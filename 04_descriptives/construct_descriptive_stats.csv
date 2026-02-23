@@ -1,0 +1,12 @@
+"Construct","Full_Name","Measurement_Type","N_Indicators","N","Mean","SD","Min","Max","Skewness","Kurtosis"
+"COM","Auditor Competence","formative",8,400,4.379,0.637,1,5,-2.562,10.047
+"PS","Professional Skepticism","reflective",5,400,4.503,0.68,1,5,-2.609,9.671
+"MO","Motivation","formative",5,400,3.932,0.641,1,5,-0.63,1.568
+"TP","Time Budget Pressure","reflective",3,400,4.064,0.729,1,5,-0.901,1.149
+"IT","Use Information Technology","reflective",4,400,4.204,0.705,1,5,-1.255,3.22
+"CEV","Corporate Ethical Values","reflective",5,400,4.303,0.696,1,5,-1.595,4.539
+"CG","Corporate Governance","formative",9,400,3.953,0.642,1,5,-0.726,2.116
+"ETH","Professional Ethics","formative",4,400,4.539,0.645,1,5,-2.549,10.036
+"TC","Task Complexity","formative",6,400,3.73,0.768,1,5,-0.409,0.052
+"AJ","Audit Judgment","reflective",3,400,4.328,0.666,1,5,-1.626,5.251
+"AQ","Audit Quality","formative",6,400,4.345,0.651,1,5,-1.93,6.966

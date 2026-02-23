@@ -18,17 +18,17 @@ It is **assumed** because the same model specification
 
 | Pair | Construct | c (original) | CI Lower 5% | p-value | Decision |
 |------|-----------|-------------|-------------|---------|----------|
-| Group_1_vs_2 | COM | 0.8625 | 0.8878 | 0.0158 | NOT INVARIANT |
-| Group_1_vs_2 | PS | 0.9986 | 0.9997 | <0.001 | NOT INVARIANT |
-| Group_1_vs_2 | MO | 0.8457 | 0.8635 | 0.0270 | NOT INVARIANT |
-| Group_1_vs_2 | TP | 0.9946 | 0.9927 | 0.1004 | INVARIANT |
-| Group_1_vs_2 | IT | 0.9992 | 0.9986 | 0.1568 | INVARIANT |
-| Group_1_vs_2 | CEV | 0.9997 | 0.9990 | 0.5534 | INVARIANT |
-| Group_1_vs_2 | CG | 0.8396 | 0.8333 | 0.0606 | INVARIANT |
-| Group_1_vs_2 | TC | 0.8439 | 0.7845 | 0.1514 | INVARIANT |
-| Group_1_vs_2 | ETH | 0.9683 | 0.9782 | 0.0104 | NOT INVARIANT |
-| Group_1_vs_2 | AJ | 0.9998 | 0.9998 | 0.0350 | NOT INVARIANT |
-| Group_1_vs_2 | AQ | 0.9786 | 0.9663 | 0.2406 | INVARIANT |
+| Group_1_vs_2 | COM | 0.8445 | 0.8974 | 0.0026 | NOT INVARIANT |
+| Group_1_vs_2 | PS | 0.9985 | 0.9997 | <0.001 | NOT INVARIANT |
+| Group_1_vs_2 | MO | 0.8408 | 0.8669 | 0.0218 | NOT INVARIANT |
+| Group_1_vs_2 | TP | 0.9953 | 0.9927 | 0.1218 | INVARIANT |
+| Group_1_vs_2 | IT | 0.9992 | 0.9986 | 0.1450 | INVARIANT |
+| Group_1_vs_2 | CEV | 0.9997 | 0.9990 | 0.5712 | INVARIANT |
+| Group_1_vs_2 | CG | 0.7933 | 0.8302 | 0.0138 | NOT INVARIANT |
+| Group_1_vs_2 | TC | 0.8252 | 0.7846 | 0.1006 | INVARIANT |
+| Group_1_vs_2 | ETH | 0.9694 | 0.9783 | 0.0100 | NOT INVARIANT |
+| Group_1_vs_2 | AJ | 0.9997 | 0.9998 | 0.0080 | NOT INVARIANT |
+| Group_1_vs_2 | AQ | 0.9785 | 0.9664 | 0.2292 | INVARIANT |
 
 **Result**: Compositional invariance is **NOT fully established**.
 MGA results should be interpreted with caution (exploratory only).
@@ -63,4 +63,4 @@ MGA results should be interpreted with caution (exploratory only).
    and PLS-POS (prediction-oriented segmentation).
 
 ---
-Generated: 2026-02-16 03:20:40
+Generated: 2026-02-19 00:56:11

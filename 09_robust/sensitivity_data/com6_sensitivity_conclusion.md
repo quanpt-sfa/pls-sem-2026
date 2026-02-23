@@ -8,7 +8,7 @@
 - VIF delta (with-without): +0.048
 
 ## Sensitivity (F.2)
-- COM→AJ: beta 0.159 → 0.148 (delta -0.011)
+- COM→AJ: beta 0.148 → 0.148 (delta +0.000)
 - Paths robust: 10/10
 
 ## Decision Framework

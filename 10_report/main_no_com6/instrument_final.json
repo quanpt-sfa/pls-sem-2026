@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-02-19T00:56:21",
+  "stage": "main",
+  "r_version": "R version 4.4.3 (2025-02-28 ucrt)",
+  "seed": 18,
+  "n_obs": 400,
+  "freeze_rules_applied": [
+    {
+      "construct": "TP",
+      "indicator": "TP3",
+      "action": "drop",
+      "reason": "Loading=0.379 < 0.40 in both pilot and main; pre-registered drop rule"
+    },
+    {
+      "construct": "COM",
+      "indicator": "COM6",
+      "action": "drop",
+      "reason": "Sensitivity run: exclude COM6 and compare with baseline main model"
+    }
+  ],
+  "constructs": [
+    {
+      "name": "COM",
+      "measurement_type": "formative",
+      "active_indicators": ["COM1", "COM2", "COM3", "COM4", "COM5", "COM7", "COM8", "COM9"]
+    },
+    {
+      "name": "PS",
+      "measurement_type": "reflective",
+      "active_indicators": ["PS1", "PS2", "PS3", "PS4", "PS5"]
+    },
+    {
+      "name": "MO",
+      "measurement_type": "formative",
+      "active_indicators": ["MO1", "MO2", "MO3", "MO4", "MO5"]
+    },
+    {
+      "name": "TP",
+      "measurement_type": "reflective",
+      "active_indicators": ["TP1", "TP2", "TP4"]
+    },
+    {
+      "name": "IT",
+      "measurement_type": "reflective",
+      "active_indicators": ["IT1", "IT2", "IT3", "IT4"]
+    },
+    {
+      "name": "CEV",
+      "measurement_type": "reflective",
+      "active_indicators": ["CEV1", "CEV2", "CEV3", "CEV4", "CEV5"]
+    },
+    {
+      "name": "CG",
+      "measurement_type": "formative",
+      "active_indicators": ["CG1", "CG2", "CG3", "CG4", "CG5", "CG6", "CG7", "CG8", "CG9"]
+    },
+    {
+      "name": "ETH",
+      "measurement_type": "formative",
+      "active_indicators": ["ETH1", "ETH2", "ETH3", "ETH4"]
+    },
+    {
+      "name": "TC",
+      "measurement_type": "formative",
+      "active_indicators": ["TC1", "TC2", "TC3", "TC4", "TC5", "TC6"]
+    },
+    {
+      "name": "AJ",
+      "measurement_type": "reflective",
+      "active_indicators": ["AJ1", "AJ2", "AJ3"]
+    },
+    {
+      "name": "AQ",
+      "measurement_type": "formative",
+      "active_indicators": ["AQ1", "AQ2", "AQ3", "AQ4", "AQ5", "AQ6"]
+    }
+  ]
+}
