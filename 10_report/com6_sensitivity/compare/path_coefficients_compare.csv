@@ -1,6 +1,6 @@
-"Path","Beta_Baseline","P_Value_Baseline","Sig_Primary_Baseline","Beta_NoCOM6","P_Value_NoCOM6","Sig_Primary_NoCOM6","Delta_Beta","Sig_Flip"
+﻿"Path","Beta_Baseline","P_Value_Baseline","Sig_Primary_Baseline","Beta_NoCOM6","P_Value_NoCOM6","Sig_Primary_NoCOM6","Delta_Beta","Sig_Flip"
 "AJ  ->  AQ",0.486,4e-04,TRUE,0.486,4e-04,TRUE,0,FALSE
-"CEV  ->  AJ",0.154,0.0744,FALSE,0.154,0.0744,FALSE,0,FALSE
+"CC  ->  AJ",0.154,0.0744,FALSE,0.154,0.0744,FALSE,0,FALSE
 "CG  ->  AJ",0.163,4e-04,TRUE,0.163,4e-04,TRUE,0,FALSE
 "COM  ->  AJ",0.148,0.0356,TRUE,0.148,0.0356,TRUE,0,FALSE
 "ETH  ->  AQ",0.444,4e-04,TRUE,0.444,4e-04,TRUE,0,FALSE

@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # 13b_gaussian_copula.R — Gaussian Copula Endogeneity Test
 # Park & Gupta (2012); Hair et al. (2022, §6.3); Hult et al. (2018)
 # ==============================================================================
@@ -974,7 +974,7 @@ get_copula_scores <- function(pls_model, data_final, controls = character()) {
 # structural_spec <- list(
 #   AQ = c("AJ", "ETH", "TC",
 #          "controls:Gen_Dummy,Exp_Ord,Pos_Ord,Edu_PostGrad,CPA_Dummy"),
-#   AJ = c("COM", "PS", "MO", "TP", "IT", "CEV", "CG",
+#   AJ = c("COM", "PS", "MO", "TP", "IT", "CC", "CG",
 #          "controls:Gen_Dummy,Exp_Ord,Pos_Ord,Edu_PostGrad,CPA_Dummy")
 # )
 #

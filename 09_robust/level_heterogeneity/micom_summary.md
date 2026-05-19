@@ -1,4 +1,4 @@
-# MICOM Results — Measurement Invariance of Composite Models
+﻿# MICOM Results — Measurement Invariance of Composite Models
 
 ## Reference
 Henseler, J., Ringle, C. M., & Sarstedt, M. (2016). Testing measurement
@@ -23,7 +23,7 @@ It is **assumed** because the same model specification
 | Group_1_vs_2 | MO | 0.8408 | 0.8669 | 0.0218 | NOT INVARIANT |
 | Group_1_vs_2 | TP | 0.9953 | 0.9927 | 0.1218 | INVARIANT |
 | Group_1_vs_2 | IT | 0.9992 | 0.9986 | 0.1450 | INVARIANT |
-| Group_1_vs_2 | CEV | 0.9997 | 0.9990 | 0.5712 | INVARIANT |
+| Group_1_vs_2 | CC | 0.9997 | 0.9990 | 0.5712 | INVARIANT |
 | Group_1_vs_2 | CG | 0.7933 | 0.8302 | 0.0138 | NOT INVARIANT |
 | Group_1_vs_2 | TC | 0.8252 | 0.7846 | 0.1006 | INVARIANT |
 | Group_1_vs_2 | ETH | 0.9694 | 0.9783 | 0.0100 | NOT INVARIANT |

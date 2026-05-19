@@ -1,4 +1,4 @@
-# Pilot Summary Report (Type A — Feasibility)
+﻿# Pilot Summary Report (Type A — Feasibility)
 Date: 2026-02-16 20:14:28.120967
 Seed: 42
 
@@ -23,7 +23,7 @@ No items auto-removed (auto_drop = DISABLED for Type A pilot).
 - MO [formative]: 5 indicators — MO1, MO2, MO3, MO4, MO5
 - TP [reflective]: 4 indicators — TP1, TP2, TP3, TP4
 - IT [reflective]: 4 indicators — IT1, IT2, IT3, IT4
-- CEV [reflective]: 5 indicators — CEV1, CEV2, CEV3, CEV4, CEV5
+- CC [reflective]: 5 indicators — CC1, CC2, CC3, CC4, CC5
 - CG [formative]: 9 indicators — CG1, CG2, CG3, CG4, CG5, CG6, CG7, CG8, CG9
 - ETH [formative]: 4 indicators — ETH1, ETH2, ETH3, ETH4
 - TC [formative]: 6 indicators — TC1, TC2, TC3, TC4, TC5, TC6

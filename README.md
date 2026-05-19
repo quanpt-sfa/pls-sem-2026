@@ -1,4 +1,4 @@
-# PLS-SEM theo khung CCA (Confirmatory Composite Analysis)
+﻿# PLS-SEM theo khung CCA (Confirmatory Composite Analysis)
 ## Pipeline phân tích cho nghiên cứu Chất lượng Kiểm toán
 
 > **Nghiên cứu:** Các nhân tố ảnh hưởng đến Chất lượng Kiểm toán (Audit Quality)
@@ -10,7 +10,7 @@
 ## 📐 Mô hình nghiên cứu
 
 ```
-Eq(1):  AJ = f(COM, PS, MO, CG, TP, IT, CEV)
+Eq(1):  AJ = f(COM, PS, MO, CG, TP, IT, CC)
 Eq(2):  AQ = f(AJ)
 Eq(3):  AQ = f(AJ, AJ×TC, AJ×ETH)
 ```
@@ -18,7 +18,7 @@ Eq(3):  AQ = f(AJ, AJ×TC, AJ×ETH)
 | Vai trò | Biến | Loại đo lường |
 |---|---|---|
 | **Biến độc lập** | COM, MO, CG | Formative |
-| **Biến độc lập** | PS, TP, IT, CEV | Reflective |
+| **Biến độc lập** | PS, TP, IT, CC | Reflective |
 | **Biến trung gian** | AJ (Audit Judgment) | Reflective |
 | **Biến phụ thuộc** | AQ (Audit Quality) | Formative |
 | **Biến điều tiết** | TC (Task Complexity) | Formative |
@@ -71,7 +71,7 @@ C4/
 │   └── distribution_plots.pdf    ← Histogram phân phối theo construct
 │
 ├── 05_measurement/               ← Đánh giá mô hình đo lường (CCA)
-│   ├── reflective/               ← Cấu trúc phản xạ (PS, TP, IT, CEV, AJ)
+│   ├── reflective/               ← Cấu trúc phản xạ (PS, TP, IT, CC, AJ)
 │   │   ├── outer_loadings.csv
 │   │   ├── indicator_decisions.csv  ← Quyết định KEEP/REVIEW/DROP + lý do
 │   │   ├── reliability_table.csv    ← Alpha, ρA, CR, AVE

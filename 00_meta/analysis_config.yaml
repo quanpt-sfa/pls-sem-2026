@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # PLS-SEM ANALYSIS CONFIGURATION (Khung CCA — Hair et al., 2022)
 # Khóa cấu hình TRƯỚC khi nhìn kết quả mô hình
 # Version: 1.1.0
@@ -35,7 +35,7 @@ meta_columns:
 
 # --- Khai báo cấu trúc (constructs) ---
 # measurement_type ĐÃ KHÓA theo phân tích lý thuyết (2026-02-13)
-# Reflective (Mode A): PS, TP, IT, CEV, AJ
+# Reflective (Mode A): PS, TP, IT, CC, AJ
 # Formative  (Mode B): COM, MO, CG, ETH, TC, AQ
 constructs:
   - name: "COM"
@@ -68,10 +68,10 @@ constructs:
     indicators: ["IT1", "IT2", "IT3", "IT4"]
     reverse_coded: []
 
-  - name: "CEV"
+  - name: "CC"
     full_name: "Corporate Ethical Values"
     measurement_type: "reflective"
-    indicators: ["CEV1", "CEV2", "CEV3", "CEV4", "CEV5"]
+    indicators: ["CC1", "CC2", "CC3", "CC4", "CC5"]
     reverse_coded: []
 
   - name: "CG"
@@ -115,7 +115,7 @@ higher_order: null
 
 # --- Mô hình cấu trúc (Structural Model / Path relationships) ---
 # ĐÃ KHÓA theo mô hình giả thuyết (2026-02-13)
-# Eq(1): AJ = f(COM, PS, MO, CG, TP, IT, CEV)
+# Eq(1): AJ = f(COM, PS, MO, CG, TP, IT, CC)
 # Eq(2): AQ = f(AJ)
 # Eq(3): AQ = f(AJ, AJ×TC, AJ×ETH)
 structural_paths:
@@ -130,7 +130,7 @@ structural_paths:
     to: "AJ"
   - from: "IT"
     to: "AJ"
-  - from: "CEV"
+  - from: "CC"
     to: "AJ"
   - from: "CG"
     to: "AJ"
@@ -170,7 +170,7 @@ mediation:
     - from: "IT"
       through: "AJ"
       to: "AQ"
-    - from: "CEV"
+    - from: "CC"
       through: "AJ"
       to: "AQ"
     - from: "CG"

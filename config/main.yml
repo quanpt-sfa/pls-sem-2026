@@ -68,16 +68,6 @@ endogeneity:
   cor_threshold: 0.95        # Skip copula if cor(X, COP_X) > this
   force_normal: false         # TRUE = override non-normality gate
 
-# --- COM6 Indicator Sensitivity (Phase 5) ---
-# Re-estimate PLS without COM6 and compare with baseline.
-# Chạy TỰ ĐỘNG sau Phase 4 nếu enable_com6_sensitivity = true.
-# Không chạy lại Phase 1 — tái sử dụng data_final, chỉ tốn thời gian bootstrap.
-com6_sensitivity:
-  construct: "COM"
-  indicator: "COM6"
-  bootstrap_samples: 5000     # same as main; set lower (e.g. 1000) for speed
-  output_subdir: "09_robust/com6_sensitivity"
-
 # --- Freeze rules ---
 # Nếu cần override instrument lock cho một vài item cụ thể,
 # khai báo ở đây. Mỗi rule phải có construct + indicator + action + reason.

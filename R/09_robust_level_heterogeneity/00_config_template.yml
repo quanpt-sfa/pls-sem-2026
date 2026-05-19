@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # 00_config_template.yml
 # Sensitivity Analysis for Level-based Heterogeneity (Score-based Clustering)
 # ==============================================================================
@@ -35,7 +35,7 @@ exogenous_constructs:
   - MO
   - TP
   - IT
-  - CEV
+  - CC
   - CG
   - TC
   - ETH
@@ -70,7 +70,7 @@ mga:
     - "MO -> AJ"
     - "TP -> AJ"
     - "IT -> AJ"
-    - "CEV -> AJ"
+    - "CC -> AJ"
     - "CG -> AJ"
     - "AJ -> AQ"
     - "TC -> AQ"

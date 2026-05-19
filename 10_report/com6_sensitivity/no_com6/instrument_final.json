@@ -1,4 +1,4 @@
-{
+﻿{
   "timestamp": "2026-02-18T22:00:34",
   "stage": "main",
   "r_version": "R version 4.4.3 (2025-02-28 ucrt)",
@@ -45,9 +45,9 @@
       "active_indicators": ["IT1", "IT2", "IT3", "IT4"]
     },
     {
-      "name": "CEV",
+      "name": "CC",
       "measurement_type": "reflective",
-      "active_indicators": ["CEV1", "CEV2", "CEV3", "CEV4", "CEV5"]
+      "active_indicators": ["CC1", "CC2", "CC3", "CC4", "CC5"]
     },
     {
       "name": "CG",

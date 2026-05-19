@@ -1,8 +1,8 @@
-# Thesis Insert — Level-based Heterogeneity Sensitivity
+﻿# Thesis Insert — Level-based Heterogeneity Sensitivity
 
 **4.X.X Sensitivity Analysis for Level-based Heterogeneity**
 
-To assess whether the structural model results are robust across naturally occurring subpopulations, a sensitivity analysis for level-based observed heterogeneity was conducted. Following Hair et al. (2022, Chapter 11), construct scores of the exogenous variables (COM, PS, MO, TP, IT, CEV, CG, TC, ETH) were extracted from the base PLS-SEM model and used as input for kmeans clustering. The optimal number of segments was determined to be k = 2 based on the mean silhouette criterion (average silhouette width = 0.296), yielding groups of n = 260 and 140 respondents respectively. Importantly, only exogenous construct scores were used for segmentation to prevent circularity (Becker et al., 2013).
+To assess whether the structural model results are robust across naturally occurring subpopulations, a sensitivity analysis for level-based observed heterogeneity was conducted. Following Hair et al. (2022, Chapter 11), construct scores of the exogenous variables (COM, PS, MO, TP, IT, CC, CG, TC, ETH) were extracted from the base PLS-SEM model and used as input for kmeans clustering. The optimal number of segments was determined to be k = 2 based on the mean silhouette criterion (average silhouette width = 0.296), yielding groups of n = 260 and 140 respondents respectively. Importantly, only exogenous construct scores were used for segmentation to prevent circularity (Becker et al., 2013).
 
 MICOM (Henseler et al., 2016) was assessed using cSEM::testMICOM() (Rademaker & Schuberth, 2020) with 5000 permutations. Configural invariance (Step 1) holds by design (identical model specification). However, compositional invariance (Step 2) was NOT fully established for all constructs. The following MGA results should therefore be interpreted as exploratory only, because group differences may reflect measurement artefacts rather than true structural differences.
 

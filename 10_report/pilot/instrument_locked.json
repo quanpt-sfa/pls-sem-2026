@@ -1,4 +1,4 @@
-{
+﻿{
   "timestamp": "2026-02-16T20:14:27",
   "git_commit": "e1b8b7d",
   "r_version": "R version 4.4.3 (2025-02-28 ucrt)",
@@ -41,11 +41,11 @@
       "active_indicators": ["IT1", "IT2", "IT3", "IT4"]
     },
     {
-      "name": "CEV",
+      "name": "CC",
       "full_name": "Corporate Ethical Values",
       "measurement_type": "reflective",
-      "original_indicators": ["CEV1", "CEV2", "CEV3", "CEV4", "CEV5"],
-      "active_indicators": ["CEV1", "CEV2", "CEV3", "CEV4", "CEV5"]
+      "original_indicators": ["CC1", "CC2", "CC3", "CC4", "CC5"],
+      "active_indicators": ["CC1", "CC2", "CC3", "CC4", "CC5"]
     },
     {
       "name": "CG",

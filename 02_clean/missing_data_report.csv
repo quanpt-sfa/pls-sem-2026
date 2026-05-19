@@ -1,4 +1,4 @@
-"variable","n_missing","pct_missing"
+﻿"variable","n_missing","pct_missing"
 "COM1",0,0
 "COM2",0,0
 "COM3",0,0
@@ -24,11 +24,11 @@
 "IT2",0,0
 "IT3",0,0
 "IT4",0,0
-"CEV1",0,0
-"CEV2",0,0
-"CEV3",0,0
-"CEV4",0,0
-"CEV5",0,0
+"CC1",0,0
+"CC2",0,0
+"CC3",0,0
+"CC4",0,0
+"CC5",0,0
 "CG1",0,0
 "CG2",0,0
 "CG3",0,0

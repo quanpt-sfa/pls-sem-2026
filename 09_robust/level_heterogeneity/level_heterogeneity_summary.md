@@ -1,4 +1,4 @@
-# Level-based Heterogeneity — Overall Summary
+﻿# Level-based Heterogeneity — Overall Summary
 
 ## Method
 Sensitivity analysis for level-based observed heterogeneity using
@@ -9,7 +9,7 @@ score-based clustering on exogenous construct scores (Hair et al., 2022).
 - Optimal k: 2
 - Mean silhouette: 0.296
 - Group sizes: 260 / 140
-- Exogenous constructs used: COM, PS, MO, TP, IT, CEV, CG, TC, ETH
+- Exogenous constructs used: COM, PS, MO, TP, IT, CC, CG, TC, ETH
 
 ## Step 2: MICOM
 - Permutations: 5000

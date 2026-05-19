@@ -35,6 +35,7 @@ source_modules <- function() {
   source("R/07_measurement_formative.R")
   source("R/08_hoc_assessment.R")
   source("R/09_structural_insample.R")
+  source("R/09b_structural_plot.R")
   source("R/10_plspredict.R")
   source("R/11_mediation.R")
   source("R/12_moderation.R")
@@ -1149,6 +1150,18 @@ run_stage <- function(stage_config_path) {
   if (isTRUE(modules$enable_structural)) {
     struct_results <- assess_structural(pls_model, boot_model, cfg, log_info,
                                           policy = inference_policy)
+    # --- Vẽ sơ đồ mô hình cấu trúc ---
+    tryCatch(
+      plot_structural_model(
+        cfg        = cfg,
+        log_info   = log_info,
+        pls_model  = pls_model,
+        boot_model = boot_model,
+        output_dir = file.path(cfg$output_dir, "figures"),
+        filename   = "structural_model"
+      ),
+      error = function(e) log_msg(log_info, paste0("  [WARN] Structural plot failed: ", e$message))
+    )
   }
 
   predict_results <- list(pass = TRUE)
